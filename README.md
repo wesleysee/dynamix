@@ -21,7 +21,7 @@ Do **not** mix Dynamix and SimpleFeatures plugins, these are not compatible.
 
 #### Installation
 
-DYNAMIX is considered a system plugin and is installed in the folder `/boot/plugins`.
+Dynamix is considered a system plugin and is installed in the folder `/boot/plugins`.
 This ensures it gets installed first, before any other plugins, and created the correct environment.
 
 - First, login to the command line on your server, e.g., at the console or a telnet session.
