@@ -41,3 +41,7 @@ installplg dynamix.webGui-2.0.0-noarch-bergware.plg
 The main screen shows the different devices in separate tabs. Click on the header to move between them.
 
 ![](/screenshots/main-array.png)
+
+The operation of the array (e.g. parity-check) can be viewed in real-time. Note the disabling of buttons!
+
+![](/screenshots/main-paritycheck.png)
