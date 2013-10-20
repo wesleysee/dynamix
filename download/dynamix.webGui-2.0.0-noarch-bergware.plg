@@ -1,0 +1,144 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+<!ENTITY plugin "dynamix.webGui">
+<!ENTITY version "2.0.0">
+<!ENTITY startup "/tmp/plugin-startup">
+<!ENTITY install "/tmp/plugin-install">
+<!ENTITY package "/tmp/plugin-package">
+<!ENTITY pkg "/boot/packages">
+<!ENTITY plg "/boot/plugins/dynamix">
+<!ENTITY rom "/boot/config/plugins/dynamix">
+<!ENTITY ram "/var/local/emhttp/plugins">
+<!ENTITY gui "/usr/local/emhttp/plugins">
+<!ENTITY log "/var/log/packages">
+<!ENTITY reg "/var/log/plugins">
+<!ENTITY src "http://bergware.com/files">
+]>
+
+<PLUGIN>
+<!--
+Copyright 2013, Bergware International
+Dynamix webGui - Enhanced graphical interface for unRAID
+
+Version history:
+ 2013-10-01 - version 2.0.0 : First release
+
+Plugin file locations:
+ /boot/plugins/dynamix.webGui-0.0.0-noarch-bergware.plg                   # this file
+ /boot/plugins/dynamix/dynamix.webGui-0.0.0-i486-1.txz                    # source code
+ /boot/plugins/dynamix/dynamix.webGui.png                                 # icon file
+ /boot/config/dynamix/dynamix.cfg                                         # non-volatile storage
+ /var/local/emhttp/plugins/dynamix.ini                                    # configuration settings
+ /var/log/plugins/dynamix                                                 # plugin registration
+-->
+
+<FILE Name="&startup;" Run="/bin/bash">
+<INLINE>
+# Prepare plugin
+rm -f $(ls &plg;/&plugin;*.t[xg]z | grep -v '&version;')
+rm -f &reg;/dynamix
+rm -f &install;
+# Wipe the stock unRAID webGui
+rm -rf /usr/local/emhttp/plugins/indexer
+rm -rf /usr/local/emhttp/plugins/webGui
+# Remove unRAID webGui upgrade plugin
+rm -f /boot/plugins/webGui-latest.plg 
+# Wait for network
+timer=30
+while [ $timer -gt 0 ]; do
+  if [ -n "$(route -n | awk '/^0.0.0.0/ {print $2}')" ]; then
+    break
+  fi
+  timer=$((timer-1))
+  sleep 1
+done
+if [ $timer -eq 0 ]; then
+  echo "No network communication !!!"
+fi
+# Remove this script
+rm -f &startup;
+</INLINE>
+</FILE>
+
+<FILE Name="&plg;/&plugin;-&version;-i486-1.txz" Run="upgradepkg --install-new">
+<URL>&src;/&plugin;-&version;-i486-1.txz</URL>
+</FILE>
+
+<FILE Name="&plg;/&plugin;.png">
+<URL>&src;/&plugin;.png</URL>
+</FILE>
+
+<FILE Name="&gui;/webGui/images/dynamix.png">
+<LOCAL>&plg;/&plugin;.png</LOCAL>
+</FILE>
+
+<FILE Name="&install;" Run="/bin/bash">
+<INLINE>
+cfg="&rom;/&plugin;.cfg"
+ini="&ram;/&plugin;.ini"
+echo "executing !"
+
+# Create configuration folder (if not existing)
+mkdir -p &rom;
+
+setup(){
+  if [ -z "$1" ]; then
+    grep -s -v "^#" $cfg >> $ini
+  else
+    echo "[$1]" >> $ini
+    grep -s "^$1\." $cfg | sed "s:^$1\.::" >> $ini
+  fi
+  shift
+  for setting in "$@"
+  do
+    grep -q "^$(echo $setting | cut -d'=' -f1)=" $ini
+    if [ $? -ne 0 ]; then
+      echo $setting >> $ini
+    fi
+  done
+}
+
+# Create plugin settings
+rm -f $ini
+setup 'confirm' 'down="1"' 'stop="1"' 'sleep="1"' 'preclear="1"' 'warn="1"'
+setup 'display' 'date="%c"' 'time="%R"' 'number=".,"' 'unit="C"' 'scale="-1"' 'align="right"' 'view=""' 'total="1"' 'spin="1"' 'size="0"' 'snow="0"' 'icons="1"' 'banner=""' 'refresh="5000"'
+setup 'parity' 'mode="0"' 'hour="0 0"' 'dotm="1"' 'month="1"' 'day="0"' 'cron=""' 'write=""'
+setup 'notify' 'date="d/m/Y"' 'time="H:i"' 'path="/tmp/notifications"' 'position="top-right"'
+
+# Create cron entry (if active)
+entry=$(grep '^cron=' $ini | cut -d'"' -f2)
+if [ -n "$entry" ]; then
+  cron=/tmp/parity.tmp
+  crontab -l | grep -vi 'Scheduled Parity Check' | grep -v '/root/mdcmd check' > $cron
+  echo '# Scheduled Parity Check' >> $cron
+  echo "$entry" | cut -d"'" -f2 >> $cron
+  crontab $cron
+  rm -f $cron
+fi
+
+# Update file access mode
+chmod 600 $(awk '/(\.htm$|\.php$|\.js$|\.page$|\.css$|\.png$|\.gif$)/ {print "/"$0}' &log;/&plugin;-&version;-i486-1)
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &plugin; has been installed."
+echo ""
+echo " Created by Bergware International"
+echo " Dynamic graphical interface for unRAID file server"
+echo " Copyright 2013, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+
+# Remove this install file - we are done!
+rm -f &install;
+</INLINE>
+</FILE>
+
+<FILE Name="&reg;/&plugin;">
+<INLINE>
+&plugin; v&version;
+</INLINE>
+</FILE>
+</PLUGIN>
