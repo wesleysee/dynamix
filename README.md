@@ -9,7 +9,7 @@ Dynamix webGui offers a number of improvements not available before:
 
 - Real-time page updates, the status view of your array is always up-to-date.
 - Tabbed viewing, more efficient use of the available screen area, scrolling is hardly required.
-- Improved fonts, better readibility and consistency of the sans-serif and monospace fonts in different browsers.
+- Improved visibility, better readibility and consistency of the sans-serif and monospace fonts in different browsers.
 - Improved operability, no more accidental cancellations or wrong button clicking.
 
 #### Overview
