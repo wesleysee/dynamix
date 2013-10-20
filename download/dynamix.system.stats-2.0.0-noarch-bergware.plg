@@ -27,7 +27,7 @@ Plugin file locations:
  /boot/config/plugins/dynamix.system.stats-0.0.0-noarch-bergware.plg      # this file
  /boot/config/plugins/dynamix/dynamix.system.stats-0.0.0-i486-1.txz       # source code
  /boot/config/plugins/dynamix/dynamix.system.stats.png                    # icon file
- /boot/config/dynamix/dynamix.system.stats.cfg                            # non-volatile storage
+ /boot/config/plugins/dynamix/dynamix.system.stats.cfg                    # non-volatile storage
  /var/local/emhttp/plugins/dynamix.system.stats.ini                       # configuration settings
  /var/log/plugins/dynamix.system.stats                                    # plugin registration
  /etc/rc.d/rc.sysstat                                                     # control script

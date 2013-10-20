@@ -27,7 +27,7 @@ Plugin file locations:
  /boot/config/plugins/dynamix.s3.sleep-0.0.0-noarch-bergware.plg          # this file
  /boot/config/plugins/dynamix/dynamix.s3.sleep-0.0.0-i486-1.txz           # source code
  /boot/config/plugins/dynamix/dynamix.s3.sleep.png                        # icon file
- /boot/config/dynamix/dynamix.s3.sleep.cfg                                # non-volatile storage
+ /boot/config/plugins/dynamix/dynamix.s3.sleep.cfg                        # non-volatile storage
  /var/local/emhttp/plugins/dynamix.s3.sleep.ini                           # configuration settings
  /var/log/plugins/dynamix.s3.sleep                                        # plugin registration
  /usr/local/emhttp/plugins/dynamix/event/disks_mounted.s3.sleep           # emhttp event script

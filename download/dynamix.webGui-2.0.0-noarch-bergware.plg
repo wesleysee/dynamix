@@ -28,7 +28,7 @@ Plugin file locations:
  /boot/plugins/dynamix.webGui-0.0.0-noarch-bergware.plg                   # this file
  /boot/plugins/dynamix/dynamix.webGui-0.0.0-i486-1.txz                    # source code
  /boot/plugins/dynamix/dynamix.webGui.png                                 # icon file
- /boot/config/dynamix/dynamix.cfg                                         # non-volatile storage
+ /boot/config/plugins/dynamix/dynamix.cfg                                 # non-volatile storage
  /var/local/emhttp/plugins/dynamix.ini                                    # configuration settings
  /var/log/plugins/dynamix                                                 # plugin registration
 -->

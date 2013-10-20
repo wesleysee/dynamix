@@ -30,7 +30,7 @@ Plugin file locations:
  /boot/config/plugins/dynamix.web.server-0.0.0-noarch-bergware.plg        # this file
  /boot/config/plugins/dynamix/dynamix.web.server-0.0.0-i486-1.txz         # source code
  /boot/config/plugins/dynamix/dynamix.web.server.png                      # icon file
- /boot/config/dynamix/dynamix.web.server.cfg                              # non-volatile storage
+ /boot/config/plugins/dynamix/dynamix.web.server.cfg                      # non-volatile storage
  /var/local/emhttp/plugins/dynamix.web.server.ini                         # configuration settings
  /var/log/plugins/dynamix.web.server                                      # plugin registration
  /usr/local/emhttp/plugins/dynamix/event/disks_mounted.web.server         # emhttp event script

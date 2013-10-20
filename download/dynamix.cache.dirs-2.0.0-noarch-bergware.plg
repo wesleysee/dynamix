@@ -27,7 +27,7 @@ Plugin file locations:
  /boot/config/plugins/dynamix.cache.dirs-0.0.0-noarch-bergware.plg        # this file
  /boot/config/plugins/dynamix/dynamix.cache.dirs-0.0.0-i486-1.txz         # source code
  /boot/config/plugins/dynamix/dynamix.cache.dirs.png                      # icon file
- /boot/config/dynamix/dynamix.cache.dirs.cfg                              # non-volatile storage
+ /boot/config/plugins/dynamix/dynamix.cache.dirs.cfg                      # non-volatile storage
  /var/local/emhttp/plugins/dynamix.cache.dirs.ini                         # configuration settings
  /var/log/plugins/dynamix.cache.dirs                                      # plugin registration
  /usr/local/emhttp/plugins/dynamix/event/disks_mounted.cache.dirs         # emhttp event script
