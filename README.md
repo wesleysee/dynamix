@@ -11,6 +11,7 @@ Dynamix webGui offers a number of improvements not available before:
 - Tabbed viewing, more efficient use of the available screen area, scrolling is hardly required.
 - Improved visibility, better readibility and consistency of the sans-serif and monospace fonts in different browsers.
 - Improved operability, no more accidental cancellations or wrong button clicking.
+- Fully compatible with unRAID OS v5.0.
 
 #### Overview
 
