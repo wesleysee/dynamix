@@ -45,3 +45,11 @@ The main screen shows the different devices in separate tabs. Click on the heade
 The operation of the array (e.g. parity-check) can be viewed in real-time. Note the disabling of buttons!
 
 ![](/screenshots/main-paritycheck.png)
+
+Settings are logically grouped. Easier to find your way.
+
+![](/screenshots/settings.png)
+
+Monospace font is made more readable, both for main screen and popup screens.
+
+![](/screenshots/system-log.png)
