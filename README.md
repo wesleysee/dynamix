@@ -11,8 +11,9 @@ Dynamix webGui offers a number of improvements not available before:
 - Tabbed viewing, more efficient use of the available screen area, scrolling is hardly required.
 - Improved visibility, better readibility and consistency of the sans-serif and monospace fonts in different browsers.
 - Improved operability, no more accidental cancellations or wrong button clicking.
+- Fully compatible with unRAID OS v5.0.
 
-#### Overview
+#### Introduction
 
 Dynamix webGui completely replaces the stock unRAID GUI which comes with version 5.0, do **not** use Dynamix on any prior versions - including
 the earlier RC candidates.
@@ -21,8 +22,8 @@ Do **not** mix Dynamix and SimpleFeatures plugins, these are not compatible.
 
 #### Installation
 
-DYNAMIX is considered a system plugin and is installed in the folder `/boot/plugins`.
-This ensures it gets installed first, before any other plugins, and created the correct environment.
+Dynamix is considered a system plugin and is installed in the folder `/boot/plugins`.
+This ensures it gets installed first, before any other plugins, and the correct environment is created upfront.
 
 - First, login to the command line on your server, e.g., at the console or a telnet session.
 - Next, make sure you have a `/boot/plugins` directory.  If it already exists, **ensure that it's empty**.
