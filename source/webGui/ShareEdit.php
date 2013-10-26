@@ -42,8 +42,6 @@ if ($name != ""):
   endif;
 endif;
 ?>
-<link type="text/css" rel="stylesheet" href="/plugins/webGui/styles/split-info.css">
-
 <script>
 $(function() {
   presetSpace(document.share_edit.shareFloor);
