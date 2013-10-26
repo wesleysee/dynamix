@@ -57,7 +57,7 @@ select[disabled]{background-color:#F9F9F9;text-shadow:1px 1px 0 #FFFFFF;color:#C
 #clear{clear:both;}
 #footer{position:fixed;bottom:0;left:0;color:#AAA;background:#F0F0F0;padding:5px 10px;width:100%;height:16px;line-height:16px;}
 #copyright{float:right;padding-right:20px;}
-.notice{background:#FFF6BF url(/plugins/webGui/images/notice.png) center no-repeat;background-position:15px 50%; /* x-pos y-pos */text-align:left;padding-left:100px;height:60px;line-height:60px;border-top:2px solid #FFD324;border-bottom:2px solid #FFD324;}
+.notice{background:#FFF6BF url(/plugins/webGui/images/notice.png) center no-repeat;background-position:15px 50%;text-align:left;padding-left:100px;height:60px;line-height:60px;border-top:2px solid #FFD324;border-bottom:2px solid #FFD324;}
 .centered{text-align:left;}
 table{border-spacing:0;margin:-20px 0 0 0;width:100%;color:#555555;border-bottom-right-radius:5px;border-bottom-left-radius:5px;}
 table td{padding:7px 0;}
