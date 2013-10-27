@@ -1,6 +1,0 @@
-.disk_add,.disk_sel{display:inline-block;padding:8px;margin:0 4px 15px 4px;}
-.disk_add img,.disk_sel img{margin-bottom:5px;}
-.disk_sel a{font-weight:bold;}
-.disk_sel{background:#D8DFEE;border-radius:5px;}
-img.off{opacity:0.5;filter:alpha(opacity=50);}
-img.fail{background:rgba(255, 0, 0, 0.5);border-radius:5px;}
