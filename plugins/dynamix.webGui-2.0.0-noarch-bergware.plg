@@ -4,6 +4,7 @@
 <!ENTITY plugin "dynamix.webGui">
 <!ENTITY version "2.0.0">
 <!ENTITY pkg "/boot/packages">
+<!ENTITY plg "/boot/plugins">
 <!ENTITY rom "/boot/config/plugins/dynamix">
 <!ENTITY gui "/usr/local/emhttp/plugins">
 <!ENTITY log "/var/log/packages">
@@ -38,7 +39,7 @@ if [ ! -f &reg;/&plugin; ]; then
   rm -f /boot/plugins/webGui-latest.*
 fi
 # Prepare plugin
-rm -f $(ls &rom;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
+rm -f $(ls &plg;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
 rm -f &reg;/&plugin;
 rm -f /tmp/plugin-install
 # Wait for network
@@ -97,16 +98,16 @@ time="H:i"
 </INLINE>
 </FILE>
 
-<FILE Name="&rom;/&plugin;-&version;-i486-1.txz" Run="upgradepkg --install-new">
+<FILE Name="&plg;/&plugin;-&version;-i486-1.txz" Run="upgradepkg --install-new">
 <URL>--no-check-certificate &src;/&plugin;-&version;-i486-1.txz</URL>
 </FILE>
 
-<FILE Name="&rom;/&plugin;.png">
+<FILE Name="&plg;/&plugin;.png">
 <URL>--no-check-certificate &src;/&plugin;.png</URL>
 </FILE>
 
 <FILE Name="&gui;/webGui/images/dynamix.png">
-<LOCAL>&rom;/&plugin;.png</LOCAL>
+<LOCAL>&plg;/&plugin;.png</LOCAL>
 </FILE>
 
 <FILE Name="/tmp/plugin-install" Run="/bin/bash">
