@@ -29,15 +29,17 @@ Plugin file locations:
 
 <FILE Name="/tmp/plugin-startup" Run="/bin/bash">
 <INLINE>
+if [ ! -f &reg;/&plugin; ]; then
+# Wipe the stock unRAID webGui
+  rm -rf /usr/local/emhttp/plugins/indexer
+  rm -rf /usr/local/emhttp/plugins/webGui
+# Remove unRAID webGui upgrade plugin
+  rm -f /boot/plugins/webGui-latest.plg
+fi
 # Prepare plugin
 rm -f $(ls &rom;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
 rm -f &reg;/&plugin;
 rm -f /tmp/plugin-install
-# Wipe the stock unRAID webGui
-rm -rf /usr/local/emhttp/plugins/indexer
-rm -rf /usr/local/emhttp/plugins/webGui
-# Remove unRAID webGui upgrade plugin
-rm -f /boot/plugins/webGui-latest.plg
 # Wait for network
 timer=30
 while [ $timer -gt 0 ]; do
