@@ -31,7 +31,7 @@ This ensures it gets installed first, before any other plugins, and the correct 
 
 ```
 cd /boot/plugins
-wget --no-check-certificate https://github.com/bergware/dynamix/raw/master/download/dynamix.webGui-2.0.0-noarch-bergware.plg
+wget --no-check-certificate https://github.com/bergware/dynamix/raw/master/plugins/dynamix.webGui-2.0.0-noarch-bergware.plg
 installplg dynamix.webGui-2.0.0-noarch-bergware.plg
 ```
 
