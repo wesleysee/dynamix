@@ -25,9 +25,9 @@ Do **not** mix Dynamix and SimpleFeatures plugins, these are not compatible.
 Dynamix is considered a system plugin and is installed in the folder `/boot/plugins`.
 This ensures it gets installed first, before any other plugins, and the correct environment is created upfront.
 
-- First, login to the command line on your server, e.g., at the console or a telnet session.
-- Next, make sure you have a `/boot/plugins` directory.  If it already exists, **ensure that it's empty**.
-- Now type this:
+- Login to the command line on your server, e.g., at the console or a telnet session.
+- Create the directory `/boot/plugins` directory, if it is not existing.
+- Type the below:
 
 ```
 cd /boot/plugins
