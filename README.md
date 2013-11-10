@@ -16,7 +16,7 @@ Dynamix webGui offers a number of improvements not available before:
 #### Introduction
 
 Dynamix webGui completely replaces the stock unRAID GUI which comes with version 5.0, do **not** use Dynamix on any prior versions - including
-the earlier RC candidates.
+the earlier RC candidates of unRAID.
 
 Do **not** mix Dynamix and SimpleFeatures plugins, these are not compatible.
 
@@ -32,7 +32,6 @@ This ensures it gets installed first, before any other plugins, and the correct 
 ```
 cd /boot/plugins
 wget --no-check-certificate https://github.com/bergware/dynamix/raw/master/plugins/dynamix.webGui-2.0.0-noarch-bergware.plg
-installplg dynamix.webGui-2.0.0-noarch-bergware.plg
 ```
 
 - Reboot your server to start with a *clean* webGui environment.
