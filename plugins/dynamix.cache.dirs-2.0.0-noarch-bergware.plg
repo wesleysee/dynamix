@@ -17,7 +17,7 @@ Copyright 2013, Bergware International
 Dynamix Folder Caching - Store names in memory to avoid disk spin-ups
 
 Version history:
- 2013-10-01 - version 2.0.0 : First release
+ 2013-12-01 - version 2.0.0 : First release
 
 Plugin file locations:
  /boot/config/plugins/dynamix.cache.dirs-0.0.0-noarch-bergware.plg        # this file

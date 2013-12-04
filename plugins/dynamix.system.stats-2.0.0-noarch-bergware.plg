@@ -17,7 +17,7 @@ Copyright 2013, Bergware International
 Dynamix System Stats - disk and system usage graphs
 
 Version history:
- 2013-10-01 - version 2.0.0 : First release
+ 2013-12-01 - version 2.0.0 : First release
 
 Plugin file locations:
  /boot/config/plugins/dynamix.system.stats-0.0.0-noarch-bergware.plg      # this file
@@ -111,9 +111,9 @@ echo "executing !"
 
 # Create cron entry
 cron=/tmp/sa1.tmp
-crontab -l | grep -v '# System data' | grep -v 'sa/sa1' > $cron
-echo '# System data collection - poll every minute for 2 seconds' >> $cron
-echo '*/1 * * * * /usr/lib/sa/sa1 2 1 &amp; 1>/dev/null 2>&amp;1' >> $cron
+crontab -l | grep -v '# System data' | grep -v '/sa/sa1' > $cron
+echo '# System data collection - poll every minute' >> $cron
+echo '*/1 * * * * /usr/lib/sa/sa1 1 1 &amp; 1>/dev/null 2>&amp;1' >> $cron
 crontab $cron
 rm -f $cron
 
