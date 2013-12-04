@@ -81,7 +81,7 @@ size="0"
 snow="0"
 icons="1"
 banner=""
-refresh="5000"
+refresh="1000"
 [parity]
 mode="0"
 hour="0 0"
