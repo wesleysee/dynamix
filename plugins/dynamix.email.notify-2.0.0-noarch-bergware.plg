@@ -157,9 +157,8 @@ install(){
 
 create(){
   tmp="/tmp/create.tmp"
-  grep "^$1=" $ini | sed "s/^$1=//" > $tmp
-  while read line
-  do
+  sed -n "/^\[$1\]/,/^\[/p" $ini | grep -v '^\[' > $tmp
+  while read line; do
     key=$(echo $line | cut -d'=' -f1)
     val=$(echo $line | cut -d'"' -f2)
     if [ $(expr index "$val" /) -eq 0 ]; then
@@ -167,7 +166,7 @@ create(){
     else
       sed -i "s:^$key=.*:$key=$val:" $2
     fi
-  done &lt; $tmp
+  done &lt;$tmp
   rm -f $tmp
 }
 
