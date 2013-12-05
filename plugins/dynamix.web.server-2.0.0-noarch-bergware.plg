@@ -273,30 +273,30 @@ install(){
 install /tmp/plugin-packages &prune;
 
 # Create PHP configuration files
-conf="&rom;/dynamix.php.cfg"
+cfg="&rom;/dynamix.php.cfg"
 tmp="/etc/php.conf"
-if [ ! -f $conf ]; then
+if [ ! -f $cfg ]; then
   zone=$(ls -o /etc/localtime-copied-* | cut -d'>' -f2 | cut -d'/' -f5-)
   if [ -n "$zone" ]; then
     sed -i "s:\(^date.timezone =\).*:\1 \"$zone\":" $tmp
   fi
-  mv -f $tmp $conf
+  mv -f $tmp $cfg
 else
   rm -f $tmp
 fi
 rm -f /etc/httpd/php.ini
-ln -sf $conf /etc/httpd/php.ini
+ln -sf $cfg /etc/httpd/php.ini
 rm -f /etc/httpd/mod_php.conf
 ln -sf /etc/mod_php.conf /etc/httpd/mod_php.conf
 rm -rf /usr/bin/phar
 ln -sf /usr/bin/phar.phar /usr/bin/phar
 
 # Create user customization conf file
-conf="&rom;/dynamix.lighttpd.cfg"
-if [ ! -f $conf ]; then
-  echo "# User customizations" > $conf
-  echo "# Add your own settings here. These won't get overwritten upon reboot" >> $conf
-  echo "#" >> $conf
+cfg="&rom;/dynamix.lighttpd.cfg"
+if [ ! -f $cfg ]; then
+  echo "# User customizations" > $cfg
+  echo "# Add your own settings here. These won't get overwritten upon reboot" >> $cfg
+  echo "#" >> $cfg
 fi
 
 # Create WEB custom configuration file
