@@ -42,7 +42,7 @@ fi
 rm -f $(ls &plg;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
 rm -f &reg;/&plugin;
 rm -f /tmp/plugin-install
-# Wait for network
+# Wait for network (only needed for this *first* plugin)
 timer=30
 while [ $timer -gt 0 ]; do
   if [ -n "$(route -n | awk '/^0.0.0.0/ {print $2}')" ]; then
