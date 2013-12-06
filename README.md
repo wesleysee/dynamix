@@ -43,7 +43,7 @@ The main screen shows the different devices in separate tabs. The current screen
 
 ![](/screenshots/main-array.png)
 
-The operation of the array (e.g. parity-check) can be viewed in real-time as well. When a parity-check is ongoing the statusbar at the bottom shows the current status. Note also the disabling of buttons to avoid accidental mis-clicking!
+The operation of the array (e.g. parity-check) can be viewed in real-time as well. When a parity-check is ongoing the statusbar at the bottom shows the current status in any screen. Note also the disabling of buttons to avoid accidental mis-clicking!
 
 ![](/screenshots/main-paritycheck.png)
 
