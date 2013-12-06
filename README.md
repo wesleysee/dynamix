@@ -20,6 +20,8 @@ the earlier RC candidates of unRAID.
 
 Do **not** mix Dynamix and SimpleFeatures plugins, these are not compatible.
 
+Dynamix webGui requires an up-to-date browser version. It has been tested with the latest versions of Internet Explorer, Chrome and Firefox.
+
 #### Installation
 
 Dynamix is considered a system plugin and is installed in the folder `/boot/plugins`.
