@@ -39,15 +39,15 @@ wget --no-check-certificate https://github.com/bergware/dynamix/raw/master/plugi
 
 #### Screenshots
 
-The main screen shows the different devices in separate tabs. Click on the header to move between them.
+The main screen shows the different devices in separate tabs. The current screen is updated in real-time. Click on the tab header to move between screens.
 
 ![](/screenshots/main-array.png)
 
-The operation of the array (e.g. parity-check) can be viewed in real-time. Note the disabling of buttons!
+The operation of the array (e.g. parity-check) can be viewed in real-time as well. When a parity-check is ongoing the statusbar at the bottom shows the current status. Note also the disabling of buttons to avoid accidental mis-clicking!
 
 ![](/screenshots/main-paritycheck.png)
 
-Settings are logically grouped. Easier to find your way.
+Settings are logically grouped. This not only removes the clutter of a busy screen, but makes it also easier to find your way.
 
 ![](/screenshots/settings.png)
 
