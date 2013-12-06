@@ -35,6 +35,7 @@ wget --no-check-certificate https://github.com/bergware/dynamix/raw/master/plugi
 ```
 
 - Reboot your server to start with a *clean* webGui environment.
+- You may need to clear to Browser's cache for correct viewing.
 
 #### Screenshots
 
