@@ -56,3 +56,7 @@ Settings are logically grouped. This not only removes the clutter of a busy scre
 Monospace font is made more readable, both for main screen and popup screens.
 
 ![](/screenshots/system-log.png)
+
+The Browser function has been rewritten for improved speed and visibility of duplicate files. These are clearly indicated by displaying them in orange.
+
+![](/screenshots/duplicates.png)
