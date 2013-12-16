@@ -66,7 +66,7 @@ The Browser function has been rewritten for improved speed and visibility of dup
 
 #### Add-ons (optional plugins)
 
-The following plugins can be used to further enhance the functionality of Dynamix. They all require the Dynamix webGui to be installed (installation will be canceled when the webGui isn't detected). Right-click the links below and select "save link as".
+The following plugins can be used to further enhance the functionality of Dynamix. They all require the Dynamix webGui to be installed (installation will be canceled when the webGui isn't detected). Right-click the links below and select "save link as". These plugins need to be place in the directory `/boot/config/plugins`.
 
 [![](/download/dynamix.active.streams.png) Active Streams](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.active.streams-2.0.0-noarch-bergware.plg) - View in real-time which streams are currently open
 
