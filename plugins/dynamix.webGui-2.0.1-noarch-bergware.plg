@@ -2,14 +2,15 @@
 
 <!DOCTYPE PLUGIN [
 <!ENTITY plugin "dynamix.webGui">
-<!ENTITY version "2.0.0">
+<!ENTITY version "2.0.1">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY plg "/boot/plugins">
 <!ENTITY rom "/boot/config/plugins/dynamix">
+<!ENTITY img "/boot/config/plugins/images">
 <!ENTITY gui "/usr/local/emhttp/plugins">
 <!ENTITY log "/var/log/packages">
 <!ENTITY reg "/var/log/plugins">
-<!ENTITY src "https://github.com/bergware/dynamix/raw/master/download">
+<!ENTITY src "https://raw.github.com/bergware/dynamix/master/download">
 ]>
 
 <PLUGIN>
@@ -18,20 +19,19 @@ Copyright 2013, Bergware International
 Dynamix webGui - Enhanced graphical interface for unRAID
 
 Version history:
+ 2013-12-31 - version 2.0.1 : Point release
  2013-12-01 - version 2.0.0 : First release
 
 Plugin file locations:
  /boot/plugins/dynamix.webGui-0.0.0-noarch-bergware.plg                   # this file
- /boot/plugins/dynamix/dynamix.webGui-0.0.0-i486-1.txz                    # executable code
- /boot/plugins/dynamix/dynamix.webGui.png                                 # icon file
+ /boot/plugins/dynamix.webGui-0.0.0-i486-1.txz                            # executable code
+ /boot/config/plugins/images/dynamix.webGui.png                           # icon file
  /boot/config/plugins/dynamix/dynamix.webGui.cfg                          # non-volatile settings
  /var/log/plugins/dynamix.webGui                                          # plugin registration
 -->
 
 <FILE Name="/tmp/plugin-startup" Run="/bin/bash">
 <INLINE>
-# Remove this script
-rm -f /tmp/plugin-startup
 if [ ! -f &reg;/&plugin; ]; then
 # Wipe the stock unRAID webGui
   rm -rf /usr/local/emhttp/plugins/indexer
@@ -56,6 +56,8 @@ done
 if [ $timer -eq 0 ]; then
   echo "No network communication !!!"
 fi
+# Remove this script
+rm -f /tmp/plugin-startup
 </INLINE>
 </FILE>
 
@@ -77,10 +79,9 @@ align="right"
 view=""
 total="1"
 spin="1"
-size="0"
+banner=""
 snow="0"
 icons="1"
-banner=""
 refresh="1000"
 [parity]
 mode="0"
@@ -102,12 +103,12 @@ time="H:i"
 <URL>--no-check-certificate &src;/&plugin;-&version;-i486-1.txz</URL>
 </FILE>
 
-<FILE Name="&plg;/&plugin;.png">
+<FILE Name="&img;/&plugin;.png">
 <URL>--no-check-certificate &src;/&plugin;.png</URL>
 </FILE>
 
-<FILE Name="&gui;/webGui/images/dynamix.png">
-<LOCAL>&plg;/&plugin;.png</LOCAL>
+<FILE Name="&gui;/webGui/images/&plugin;.png">
+<LOCAL>&img;/&plugin;.png</LOCAL>
 </FILE>
 
 <FILE Name="/tmp/plugin-install" Run="/bin/bash">

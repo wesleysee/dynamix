@@ -2,13 +2,14 @@
 
 <!DOCTYPE PLUGIN [
 <!ENTITY plugin "dynamix.web.server">
-<!ENTITY version "2.0.0">
+<!ENTITY version "2.0.1">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY rom "/boot/config/plugins/dynamix">
+<!ENTITY img "/boot/config/plugins/images">
 <!ENTITY gui "/usr/local/emhttp/plugins">
 <!ENTITY log "/var/log/packages">
 <!ENTITY reg "/var/log/plugins">
-<!ENTITY src "https://github.com/bergware/dynamix/raw/master/download">
+<!ENTITY src "https://raw.github.com/bergware/dynamix/master/download">
 <!ENTITY url "http://slackware.cs.utah.edu/pub/slackware/slackware/slackware">
 <!ENTITY ur2 "http://slackware.cs.utah.edu/pub/slackware/slackware-current/slackware">
 <!ENTITY prune "false"><!-- set to "true" to activate pruning -->
@@ -20,12 +21,13 @@ Copyright 2013, Bergware International
 Dynamix Web Server - Lighttpd 1.4.31 & PHP 5.3.27
 
 Version history:
+ 2013-12-31 - version 2.0.1 : Point release
  2013-12-01 - version 2.0.0 : First release
 
 Plugin file locations:
  /boot/config/plugins/dynamix.web.server-0.0.0-noarch-bergware.plg        # this file
  /boot/config/plugins/dynamix/dynamix.web.server-0.0.0-i486-1.txz         # executable code
- /boot/config/plugins/dynamix/dynamix.web.server.png                      # icon file
+ /boot/config/plugins/images/dynamix.web.server.png                       # icon file
  /boot/config/plugins/dynamix/dynamix.web.server.cfg                      # non-volatile settings
  /var/log/plugins/dynamix.web.server                                      # plugin registration
 
@@ -44,23 +46,26 @@ Plugin file locations:
 
 <FILE Name="/tmp/plugin-startup" Run="/bin/bash">
 <INLINE>
+if [ -f /var/log/plugins/dynamix.webGui ]; then
+# Prepare plugin
+  rm -f $(ls &rom;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
+  rm -f &reg;/&plugin;
+  rm -f /tmp/plugin-install
+  rm -f /etc/rc.d/rc.lighttpd
+  rm -f /etc/rc.d/rc.snmpd
+  rm -f &gui;/dynamix/event/disks_mounted.&plugin;
+  rm -f &gui;/dynamix/event/unmounting_disks.&plugin;
+# Prepare packages
+  rm -f /tmp/plugin-packages
+  code=0
+else
+# Dynamix webGui not present
+  echo "missing Dynamix webGui plugin !!!"
+  code=1
+fi
 # Remove this script
 rm -f /tmp/plugin-startup
-# Dynamix webGui present
-if [ ! -f /var/log/plugins/dynamix.webGui ]; then
-  echo "missing Dynamix webGui plugin !!!"
-  exit 1
-fi
-# Prepare plugin
-rm -f $(ls &rom;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
-rm -f &reg;/&plugin;
-rm -f /tmp/plugin-install
-rm -f /etc/rc.d/rc.lighttpd
-rm -f /etc/rc.d/rc.snmpd
-rm -f &gui;/dynamix/event/disks_mounted.&plugin;
-rm -f &gui;/dynamix/event/unmounting_disks.&plugin;
-# Prepare packages
-rm -f /tmp/plugin-packages
+exit $code
 </INLINE>
 </FILE>
 
@@ -81,29 +86,29 @@ access="0"
 a openssl-solibs-1.0.1e-i486-1.txz           # openssl library
 n openssl-1.0.1e-i486-1.txz                  # openssl library
 d libtool-2.4.2-i486-1.txz                   # tools library
-d m4-1.4.16-i486-1.txz                       # m4 library
+d m4-1.4.17-i486-1.txz                       # m4 library
 l libmcrypt-2.5.8-i486-1.txz                 # mcrypt library
 
 # Recommended packages
 l pcre-8.12-i486-1.txz                       # pcre library (general usage)
-ap sqlite-3.7.16-i486-1.txz                  # sqlite library (used by SQLITE extension)
+ap sqlite-3.7.17-i486-1.txz                  # sqlite library (used by SQLITE extension)
 l libzip-0.10.1-i486-1.txz                   # zip library (used by ZIP extension)
-l freetype-2.4.11-i486-1.txz                 # freetype library (used by GD extension)
+l freetype-2.5.0.1-i486-1.txz                # freetype library (used by GD extension)
 l libjpeg-v8a-i486-1.txz                     # jpeg library (used by GD extension)
 l libpng-1.4.12-i486-1.txz                   # png library (used by GD extension)
 l t1lib-5.1.2-i486-3.txz                     # t1 library (used by GD extension)
-x libxcb-1.9-i486-1.txz                      # xcb library (used by GD extension)
-x libX11-1.5.0-i486-1.txz                    # x11 library (used by GD extension)
-x libXau-1.0.7-i486-1.txz                    # xau library (used by GD extension)
+x libxcb-1.9.1-i486-1.txz                    # xcb library (used by GD extension)
+x libX11-1.6.2-i486-1.txz                    # x11 library (used by GD extension)
+x libXau-1.0.8-i486-1.txz                    # xau library (used by GD extension)
 x libXdmcp-1.1.1-i486-1.txz                  # xdmcp library (used by GD extension)
-x libXpm-3.5.10-i486-1.txz                   # xpm library (used by GD extension)
+x libXpm-3.5.11-i486-1.txz                   # xpm library (used by GD extension)
 
 # Optional packages (remove "no-install" option)
 l aspell-0.60.6-i486-1.txz   no-install      # spelling library (used by PSPELL extension)
 l enchant-1.6.0-i486-1.txz   no-install      # enchant library (used by ENCHANT extension)
 l libxslt-1.1.28-i486-1.txz  no-install      # xslt library (used by XSL extension)
-a xz-5.0.4-i486-1.tgz        no-install      # xz utility (used by XSL extension)
-n curl-7.30.0-i486-1.txz     no-install      # curl library (used by CURL extension)
+a xz-5.0.5-i486-1.tgz        no-install      # xz utility (used by XSL extension)
+n curl-7.31.0-i486-1.txz     no-install      # curl library (used by CURL extension)
 n net-snmp-5.7.2-i486-2.txz  no-install      # snmp library (used by SNMP extension)
 </INLINE>
 </FILE>
@@ -112,12 +117,12 @@ n net-snmp-5.7.2-i486-2.txz  no-install      # snmp library (used by SNMP extens
 <URL>--no-check-certificate &src;/&plugin;-&version;-i486-1.txz</URL>
 </FILE>
 
-<FILE Name="&rom;/&plugin;.png">
+<FILE Name="&img;/&plugin;.png">
 <URL>--no-check-certificate &src;/&plugin;.png</URL>
 </FILE>
 
-<FILE Name="&gui;/dynamix/images/web-server.png">
-<LOCAL>&rom;/&plugin;.png</LOCAL>
+<FILE Name="&gui;/dynamix/images/&plugin;.png">
+<LOCAL>&img;/&plugin;.png</LOCAL>
 </FILE>
 
 <FILE Name="/etc/rc.d/rc.lighttpd" Mode="0770">

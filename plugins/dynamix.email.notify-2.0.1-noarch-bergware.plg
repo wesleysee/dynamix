@@ -2,13 +2,14 @@
 
 <!DOCTYPE PLUGIN [
 <!ENTITY plugin "dynamix.email.notify">
-<!ENTITY version "2.0.0">
+<!ENTITY version "2.0.1">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY rom "/boot/config/plugins/dynamix">
+<!ENTITY img "/boot/config/plugins/images">
 <!ENTITY gui "/usr/local/emhttp/plugins">
 <!ENTITY log "/var/log/packages">
 <!ENTITY reg "/var/log/plugins">
-<!ENTITY src "https://github.com/bergware/dynamix/raw/master/download">
+<!ENTITY src "https://raw.github.com/bergware/dynamix/master/download">
 <!ENTITY url "http://slackware.cs.utah.edu/pub/slackware/slackware/slackware">
 <!ENTITY ur2 "http://slackware.cs.utah.edu/pub/slackware/slackware-current/slackware">
 <!ENTITY prune "false"><!-- set to "true" to activate pruning -->
@@ -20,12 +21,13 @@ Copyright 2013, Bergware International
 Dynamix Email Notification - Automatic email reporting on critical conditions
 
 Version history:
+ 2013-12-31 - version 2.0.1 : Point release
  2013-12-01 - version 2.0.0 : First release
 
 Plugin file locations:
  /boot/config/plugins/dynamix.email.notify-0.0.0-noarch-bergware.plg      # this file
  /boot/config/plugins/dynamix/dynamix.email.notify-0.0.0-i486-1.txz       # executable code
- /boot/config/plugins/dynamix/dynamix.email.notify.png                    # icon file
+ /boot/config/plugins/images/dynamix.email.notify.png                     # icon file
  /boot/config/plugins/dynamix/dynamix.email.notify.cfg                    # non-volatile settings
  /var/log/plugins/dynamix.email.notify                                    # plugin registration
 
@@ -38,20 +40,23 @@ Plugin file locations:
 
 <FILE Name="/tmp/plugin-startup" Run="/bin/bash">
 <INLINE>
+if [ -f /var/log/plugins/dynamix.webGui ]; then
+# Prepare plugin
+  rm -f $(ls &rom;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
+  rm -f &reg;/&plugin;
+  rm -f /tmp/plugin-install
+  rm -f /etc/rc.d/rc.emailnotify
+# Prepare packages
+  rm -f /tmp/plugin-packages
+  code=0
+else
+# Dynamix webGui not present
+  echo "missing Dynamix webGui plugin !!!"
+  code=1
+fi
 # Remove this script
 rm -f /tmp/plugin-startup
-# Dynamix webGui present
-if [ ! -f /var/log/plugins/dynamix.webGui ]; then
-  echo "missing Dynamix webGui plugin !!!"
-  exit 1
-fi
-# Prepare plugin
-rm -f $(ls &rom;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
-rm -f &reg;/&plugin;
-rm -f /tmp/plugin-install
-rm -f /etc/rc.d/rc.emailnotify
-# Prepare packages
-rm -f /tmp/plugin-packages
+exit $code
 </INLINE>
 </FILE>
 
@@ -76,12 +81,12 @@ n openssl-1.0.1e-i486-1.txz                  # openssl library
 <URL>--no-check-certificate &src;/&plugin;-&version;-i486-1.txz</URL>
 </FILE>
 
-<FILE Name="&rom;/&plugin;.png">
+<FILE Name="&img;/&plugin;.png">
 <URL>--no-check-certificate &src;/&plugin;.png</URL>
 </FILE>
 
-<FILE Name="&gui;/dynamix/images/email.png">
-<LOCAL>&rom;/&plugin;.png</LOCAL>
+<FILE Name="&gui;/dynamix/images/&plugin;.png">
+<LOCAL>&img;/&plugin;.png</LOCAL>
 </FILE>
 
 <FILE Name="/etc/rc.d/rc.emailnotify" Mode="0770">
