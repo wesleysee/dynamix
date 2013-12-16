@@ -33,8 +33,10 @@ This ensures it gets installed first, before any other plugins, and the correct 
 
 ```
 cd /boot/plugins
-wget --no-check-certificate https://github.com/bergware/dynamix/raw/master/plugins/dynamix.webGui-2.0.0-noarch-bergware.plg
+wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.0-noarch-bergware.plg
 ```
+
+- Alternatively: [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.0-noarch-bergware.plg) (right-click and select "save link as")
 
 - Reboot your server to start with a *clean* webGui environment.
 - You may need to clear your Browser's cache for correct viewing.
