@@ -90,7 +90,7 @@ d m4-1.4.17-i486-1.txz                       # m4 library
 l libmcrypt-2.5.8-i486-1.txz                 # mcrypt library
 
 # Recommended packages
-l pcre-8.12-i486-1.txz                       # pcre library (general usage)
+l pcre-8.33-i486-1.txz                       # pcre library (general usage)
 ap sqlite-3.7.17-i486-1.txz                  # sqlite library (used by SQLITE extension)
 l libzip-0.10.1-i486-1.txz                   # zip library (used by ZIP extension)
 l freetype-2.5.0.1-i486-1.txz                # freetype library (used by GD extension)
