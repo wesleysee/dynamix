@@ -20,7 +20,7 @@ the earlier RC candidates of unRAID.
 
 Do **not** mix Dynamix and SimpleFeatures plugins, these are not compatible.
 
-Dynamix webGui requires an up-to-date browser version. It has been tested with the latest versions of Internet Explorer, Chrome and Firefox.
+Dynamix webGui requires an up-to-date browser version. It has been tested with the latest versions of Internet Explorer, Chrome, Firefox and Safari.
 
 #### Installation
 
