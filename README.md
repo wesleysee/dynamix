@@ -24,7 +24,7 @@ Dynamix webGui requires an up-to-date browser version. It has been tested with t
 
 #### Installation
 
-Dynamix is considered a system plugin and is installed in the folder `/boot/plugins`.
+Dynamix webGui is considered a system plugin and is installed in the folder `/boot/plugins`.
 This ensures it gets installed first, before any other plugins, and the correct environment is created upfront.
 
 - Login to the command line on your server, e.g., at the console or a telnet session.
