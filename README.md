@@ -15,8 +15,7 @@ Dynamix webGui offers a number of improvements not available before:
 
 #### Introduction
 
-Dynamix webGui completely replaces the stock unRAID GUI which comes with version 5.0, do **not** use Dynamix on any prior versions - including
-the earlier RC candidates of unRAID.
+Dynamix webGui completely replaces the stock unRAID GUI which comes with version 5.0, do **not** use Dynamix webGui on any prior versions - including the earlier RC candidates of unRAID.
 
 Do **not** mix Dynamix and SimpleFeatures plugins, these are not compatible.
 
