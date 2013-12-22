@@ -21,3 +21,10 @@ The following plugins can be used to further enhance the functionality of Dynami
 [![](/download/dynamix.system.temp.png) System Temp](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.temp-2.0.1-noarch-bergware.plg) - View in real-time CPU and motherboard temperatures
 
 [![](/download/dynamix.web.server.png) Web Server](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.web.server-2.0.1-noarch-bergware.plg) - Run your own web server, including PHP
+
+
+To install the plugin after copying it, telnet to your unRAID server and type the following:
+```
+cd /boot/config/plugins
+installplg <name-of-plugin>.plg
+```
