@@ -11,7 +11,7 @@
 <!ENTITY reg "/var/log/plugins">
 <!ENTITY src "https://raw.github.com/bergware/dynamix/master/download">
 <!ENTITY url "http://slackware.cs.utah.edu/pub/slackware/slackware">
-<!ENTITY dir "14.0">    <!-- select slackware version for download -->
+<!ENTITY dir "13.1">    <!-- select slackware version for packages, see list below -->
 <!ENTITY prune "false"> <!-- set prune to "true" to activate pruning -->
 ]>
 
@@ -297,11 +297,20 @@ ln -sf /etc/mod_php.conf /etc/httpd/mod_php.conf
 rm -rf /usr/bin/phar
 ln -sf /usr/bin/phar.phar /usr/bin/phar
 
-# Create lighttpd - pcre link
+# PCRE linkage (workaround)
 if [ "&dir;" != "current" ]; then
   rm -rf /usr/lib/libpcre.so.1
   ln -sf /usr/lib/libpcre.so.0.0.1 /usr/lib/libpcre.so.1
 fi
+
+# SSL linkage (workaround)
+if [ "&dir;" == "13.1" -o "&dir;" == "13.37" ]; then
+  rm -rf /lib/libcrypto.so.1
+  ln -sf /lib/libcrypto.so.0.9.8 /lib/libcrypto.so.1
+  rm -rf /lib/libssl.so.1
+  ln -sf /lib/libssl.so.0.9.8 /lib/libssl.so.1
+fi
+
 # Create user customization conf file
 cfg="&rom;/dynamix.lighttpd.cfg"
 if [ ! -f $cfg ]; then

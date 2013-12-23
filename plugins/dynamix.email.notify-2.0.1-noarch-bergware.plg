@@ -11,7 +11,7 @@
 <!ENTITY reg "/var/log/plugins">
 <!ENTITY src "https://raw.github.com/bergware/dynamix/master/download">
 <!ENTITY url "http://slackware.cs.utah.edu/pub/slackware/slackware">
-<!ENTITY dir "14.0">    <!-- select slackware version for download -->
+<!ENTITY dir "13.1">    <!-- select slackware version for packages, see list below -->
 <!ENTITY prune "false"> <!-- set prune to "true" to activate pruning -->
 ]>
 
@@ -178,11 +178,19 @@ create(){
 # Install external packages
 install /tmp/plugin-packages &prune;
 
-# Create configuration links
+# SSMTP linkage
 rm -f /etc/ssmtp/ssmtp.*
 ln -sf /etc/ssmtp_config.conf /etc/ssmtp/ssmtp.conf
 rm -f /etc/ssmtp/revaliases.*
 ln -sf /etc/ssmtp_revaliases.conf /etc/ssmtp/revaliases.conf
+
+# SSL linkage (workaround)
+if [ "&dir;" == "13.1" -o "&dir;" == "13.37" ]; then
+  rm -rf /lib/libcrypto.so.1
+  ln -sf /lib/libcrypto.so.0.9.8 /lib/libcrypto.so.1
+  rm -rf /lib/libssl.so.1
+  ln -sf /lib/libssl.so.0.9.8 /lib/libssl.so.1
+fi
 
 # Create configuration files
 create 'email' '/etc/unraid_notify.conf'
