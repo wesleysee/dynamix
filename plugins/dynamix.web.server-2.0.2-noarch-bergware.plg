@@ -84,12 +84,12 @@ access="0"
 <FILE Name="/tmp/plugin-packages">
 <INLINE>
 # Mandatory packages     13.1                13.37             14.0              current
-a openssl-solibs  txz    0.9.8y-i486-1       0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1                   # openssl library
-n openssl         txz    0.9.8y-i486-1       0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1                   # openssl library
-d libtool         txz    2.2.6b-i486-2       2.4-i486-1        2.4.2-i486-1      2.4.2-i486-2                    # tools library
-d m4              txz    1.4.14-i486-1       1.4.16-i486-1     1.4.16-i486-1     1.4.17-i486-1                   # m4 library
-l libmcrypt       txz    2.5.8-i486-1        2.5.8-i486-1      2.5.8-i486-1      2.5.8-i486-1                    # mcrypt library
-l pcre            txz    8.02-i486-1         8.12-i486-1       8.12-i486-1       8.33-i486-1                     # pcre library
+a openssl-solibs  txz    0.9.8y-i486-1       0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1     #no-install   # openssl library
+n openssl         txz    0.9.8y-i486-1       0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1     #no-install   # openssl library
+d libtool         txz    2.2.6b-i486-2       2.4-i486-1        2.4.2-i486-1      2.4.2-i486-2      #no-install   # tools library
+d m4              txz    1.4.14-i486-1       1.4.16-i486-1     1.4.16-i486-1     1.4.17-i486-1     #no-install   # m4 library
+l libmcrypt       txz    2.5.8-i486-1        2.5.8-i486-1      2.5.8-i486-1      2.5.8-i486-1      #no-install   # mcrypt library
+l pcre            txz    8.02-i486-1         8.12-i486-1       8.12-i486-1       8.33-i486-1       #no-install   # pcre library
 
 # Recommended packages   13.1                13.37             14.0              current
 ap sqlite         txz    3.6.23.1-i486-1     3.7.5-i486-1      3.7.14.1-i486-1   3.7.17-i486-1     #no-install   # sqlite library (used by SQLITE extension)

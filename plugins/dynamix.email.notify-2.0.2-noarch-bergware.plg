@@ -72,9 +72,9 @@ service="0"
 
 <FILE Name="/tmp/plugin-packages">
 <INLINE>
-# Mandatory packages     13.1              13.37             14.0              current
-a openssl-solibs  txz    0.9.8y-i486-1     0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1      # openssl library
-n openssl         txz    0.9.8y-i486-1     0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1      # openssl library
+# Mandatory packages     13.1                13.37             14.0              current
+a openssl-solibs  txz    0.9.8y-i486-1       0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1     #no-install   # openssl library
+n openssl         txz    0.9.8y-i486-1       0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1     #no-install   # openssl library
 </INLINE>
 </FILE>
 
