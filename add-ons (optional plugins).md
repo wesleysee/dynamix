@@ -23,7 +23,7 @@ installplg <new-plugin-version>.plg
 
 [![](/download/dynamix.dns.server.png) DNS Server](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.dns.server-2.0.1-noarch-bergware.plg) - Run your own DNS server to maintain your local domain
 
-[![](/download/dynamix.email.notify.png) Email Notify](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.email.notify-2.0.1-noarch-bergware.plg) - Receive periodic status updates by mail
+[![](/download/dynamix.email.notify.png) Email Notify](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.email.notify-2.0.2-noarch-bergware.plg) - Receive periodic status updates by mail
 
 [![](/download/dynamix.s3.sleep.png) S3 Sleep](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.s3.sleep-2.0.1-noarch-bergware.plg) - Put your system to sleep on predefined conditions
 
@@ -33,4 +33,4 @@ installplg <new-plugin-version>.plg
 
 [![](/download/dynamix.system.temp.png) System Temp](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.temp-2.0.2-noarch-bergware.plg) - View in real-time CPU and motherboard temperatures (updated)
 
-[![](/download/dynamix.web.server.png) Web Server](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.web.server-2.0.1-noarch-bergware.plg) - Run your own web server, including PHP
+[![](/download/dynamix.web.server.png) Web Server](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.web.server-2.0.2-noarch-bergware.plg) - Run your own web server, including PHP
