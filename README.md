@@ -26,6 +26,10 @@ Do **not** mix Dynamix and SimpleFeatures plugins, these are not compatible.
 
 Dynamix webGui requires an up-to-date browser version. It has been tested with the latest versions of Internet Explorer, Chrome, Firefox and Safari.
 
+#### Download warning
+
+*DO NOT DOWNLOAD FILES DIRECTLY FROM THE FOLDER 'DOWNLOAD' OR 'PLUGINS' BUT USE THE LINKS PROVIDED IN THIS 'README' FILE INSTEAD. THE SAME IS TRUE FOR THE OPTIONAL PLUGINS - USE THE LINKS PROVIDED IN THE FILE 'OPTIONAL PLUGINS'*
+
 #### Installation
 
 *This describes a first time installation, if you are upgrading from an older version, see the section 'Upgrading'.*
@@ -58,10 +62,6 @@ cd /boot/plugins
 rm dynamix.webGui-2.0.1-noarch-bergware.plg
 installplg dynamix.webGui-2.0.2-noarch-bergware.plg
 ```
-
-#### Download warning
-
-*DO NOT DOWNLOAD FILES DIRECTLY FROM THE FOLDER 'DOWNLOAD' BUT USE THE PROVIDED LINKS IN THIS README FILE INSTEAD. THE SAME IS TRUE FOR THE OPTIONAL PLUGINS - USE THE LINKS PROVIDED IN THE FILE 'OPTIONAL PLUGINS'*
 
 #### Screenshots
 
