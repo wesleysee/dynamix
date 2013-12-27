@@ -59,6 +59,10 @@ rm dynamix.webGui-2.0.1-noarch-bergware.plg
 installplg dynamix.webGui-2.0.2-noarch-bergware.plg
 ```
 
+#### Download
+
+*DO NOT DOWNLOAD FILES DIRECTLY FROM THE FOLDER 'DOWNLOAD' BUT USE THE PROVIDED LINKS IN THIS README FILE INSTEAD. THE SAME IS TRUE FOR THE OPTIONAL PLUGINS - USE THE LINKS PROVIDED IN THE FILE 'OPTIONAL ADD-ONS'*
+
 #### Screenshots
 
 The main screen shows the different devices in separate tabs. The current screen is updated in real-time. Click on the tab header to move between screens.
