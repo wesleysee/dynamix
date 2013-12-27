@@ -55,8 +55,8 @@ exit $code
 
 <FILE Name="/tmp/plugin-packages">
 <INLINE>
-# Mandatory packages     13.1              13.37             14.0              current
-ap lm_sensors    txz     3.3.4-i486-1      3.3.4-i486-1      3.3.4-i486-1      3.3.4-i486-1       # lm-sensors library
+# Optional packages      13.1              13.37             14.0              current
+ap lm_sensors    txz     3.3.4-i486-1      3.3.4-i486-1      3.3.4-i486-1      3.3.4-i486-1      #no-install       # lm-sensors library
 </INLINE>
 </FILE>
 
