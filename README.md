@@ -49,13 +49,13 @@ wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugi
 
 #### Upgrading
 
-You can upgrade to a newer version of [Dynamix webGui](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.2-noarch-bergware.plg) (right-click and select "save link as")
+You can upgrade to the latest version of [Dynamix webGui](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.2-noarch-bergware.plg) (right-click and select "save link as")
 
 Save the file in `/boot/plugins` and type the below:
 
 ```
 cd /boot/plugins
-installplg dynamix.webGui-2.0.2-noarch-bergware.plg.plg
+installplg dynamix.webGui-2.0.2-noarch-bergware.plg
 ```
 
 #### Screenshots
