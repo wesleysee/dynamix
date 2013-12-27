@@ -92,19 +92,19 @@ l libmcrypt       txz    2.5.8-i486-1        2.5.8-i486-1      2.5.8-i486-1     
 l pcre            txz    8.02-i486-1         8.12-i486-1       8.12-i486-1       8.33-i486-1                     # pcre library
 
 # Recommended packages   13.1                13.37             14.0              current
-ap sqlite         txz    3.6.23.1-i486-1     3.7.5-i486-1      3.7.14.1-i486-1   3.7.17-i486-1                   # sqlite library (used by SQLITE extension)
-l libzip          txz    0.9-i486-2          0.9.3-i486-1      0.9.3-i486-1      0.10.1-i486-1                   # zip library (used by ZIP extension)
-l freetype        txz    2.4.11-i486-1       2.4.11-i486-1     2.4.11-i486-1     2.5.0.1-i486-1                  # freetype library (used by GD extension)
-l libjpeg         txz    v8a-i486-2          v8a-i486-2        v8a-i486-2        v8a-i486-2                      # jpeg library (used by GD extension)
-l libpng          txz    1.4.12-i486-1       1.4.12-i486-1     1.4.12-i486-1     1.4.12-i486-1                   # png library (used by GD extension)
-l t1lib           txz    5.1.2-i486-2        5.1.2-i486-3      5.1.2-i486-3      5.1.2-i486-3                    # t1 library (used by GD extension)
-x libxcb          txz    1.6-i486-1          1.7-i486-1        1.8.1-i486-1      1.9.1-i486-1                    # xcb library (used by GD extension)
-x libX11          txz    1.3.3-i486-1        1.4.3-i486-2      1.5.0-i486-1      1.6.2-i486-1                    # x11 library (used by GD extension)
-x libXau          txz    1.0.5-i486-1        1.0.6-i486-1      1.0.7-i486-1      1.0.8-i486-1                    # xau library (used by GD extension)
-x libXdmcp        txz    1.0.3-i486-1        1.1.0-i486-1      1.1.1-i486-1      1.1.1-i486-1                    # xdmcp library (used by GD extension)
-x libXpm          txz    3.5.8-i486-1        3.5.9-i486-1      3.5.10-i486-1     3.5.11-i486-1                   # xpm library (used by GD extension)
+ap sqlite         txz    3.6.23.1-i486-1     3.7.5-i486-1      3.7.14.1-i486-1   3.7.17-i486-1     #no-install   # sqlite library (used by SQLITE extension)
+l libzip          txz    0.9-i486-2          0.9.3-i486-1      0.9.3-i486-1      0.10.1-i486-1     #no-install   # zip library (used by ZIP extension)
+l freetype        txz    2.4.11-i486-1       2.4.11-i486-1     2.4.11-i486-1     2.5.0.1-i486-1    #no-install   # freetype library (used by GD extension)
+l libjpeg         txz    v8a-i486-2          v8a-i486-2        v8a-i486-2        v8a-i486-2        #no-install   # jpeg library (used by GD extension)
+l libpng          txz    1.4.12-i486-1       1.4.12-i486-1     1.4.12-i486-1     1.4.12-i486-1     #no-install   # png library (used by GD extension)
+l t1lib           txz    5.1.2-i486-2        5.1.2-i486-3      5.1.2-i486-3      5.1.2-i486-3      #no-install   # t1 library (used by GD extension)
+x libxcb          txz    1.6-i486-1          1.7-i486-1        1.8.1-i486-1      1.9.1-i486-1      #no-install   # xcb library (used by GD extension)
+x libX11          txz    1.3.3-i486-1        1.4.3-i486-2      1.5.0-i486-1      1.6.2-i486-1      #no-install   # x11 library (used by GD extension)
+x libXau          txz    1.0.5-i486-1        1.0.6-i486-1      1.0.7-i486-1      1.0.8-i486-1      #no-install   # xau library (used by GD extension)
+x libXdmcp        txz    1.0.3-i486-1        1.1.0-i486-1      1.1.1-i486-1      1.1.1-i486-1      #no-install   # xdmcp library (used by GD extension)
+x libXpm          txz    3.5.8-i486-1        3.5.9-i486-1      3.5.10-i486-1     3.5.11-i486-1     #no-install   # xpm library (used by GD extension)
 
-# Optional packages      13.1                13.37             14.0              current           remove this
+# Optional packages      13.1                13.37             14.0              current
 l aspell          txz    0.60.5-i486-2       0.60.6-i486-1     0.60.6-i486-1     0.60.6-i486-1     no-install    # spelling library (used by PSPELL extension)
 l enchant         txz    1.5.0-i486-1        1.5.0-i486-1      1.5.0-i486-1      1.6.0-i486-1      no-install    # enchant library (used by ENCHANT extension)
 l libxslt         txz    1.1.26-i486-1       1.1.26-i486-1     1.1.26-i486-2     1.1.28-i486-1     no-install    # xslt library (used by XSL extension)
