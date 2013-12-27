@@ -2,7 +2,7 @@
 
 <!DOCTYPE PLUGIN [
 <!ENTITY plugin "dynamix.email.notify">
-<!ENTITY version "2.0.1">
+<!ENTITY version "2.0.2">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY rom "/boot/config/plugins/dynamix">
 <!ENTITY img "/boot/config/plugins/images">
@@ -10,7 +10,7 @@
 <!ENTITY log "/var/log/packages">
 <!ENTITY reg "/var/log/plugins">
 <!ENTITY src "https://raw.github.com/bergware/dynamix/master/download">
-<!ENTITY url "http://slackware.cs.utah.edu/pub/slackware/slackware">
+<!ENTITY url "http://slackware.cs.utah.edu/pub/slackware">
 <!ENTITY dir "13.37">   <!-- select slackware version for packages, see list below -->
 <!ENTITY prune "false"> <!-- set prune to "true" to activate pruning -->
 ]>
@@ -21,6 +21,7 @@ Copyright 2013, Bergware International
 Dynamix Email Notification - Automatic email reporting on critical conditions
 
 Version history:
+ 2013-12-27 - version 2.0.2 : Point release
  2013-12-21 - version 2.0.1 : Point release
  2013-12-01 - version 2.0.0 : First release
 
@@ -72,8 +73,8 @@ service="0"
 <FILE Name="/tmp/plugin-packages">
 <INLINE>
 # Mandatory packages     13.1              13.37             14.0              current
-a openssl-solibs  txz    0.9.8n-i486-1     0.9.8r-i486-3     1.0.1c-i486-3     1.0.1e-i486-1      # openssl library
-n openssl         txz    0.9.8n-i486-1     0.9.8r-i486-3     1.0.1c-i486-3     1.0.1e-i486-1      # openssl library
+a openssl-solibs  txz    0.9.8y-i486-1     0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1      # openssl library
+n openssl         txz    0.9.8y-i486-1     0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1      # openssl library
 </INLINE>
 </FILE>
 
@@ -141,9 +142,15 @@ install(){
            '14.0') version=${data[5]} ;;
         'current') version=${data[6]} ;;
         esac
-        file=${data[1]}-$version.${data[2]}
+        path=&url;/slackware-&dir;/slackware/${data[0]}
+        file=${data[1]}-${version}.${data[2]}
+        wget -q --spider $path/$file
+        if [ $? -ne 0 ]; then
+          path=&url;/slackware-&dir;/patches/packages
+          file=${data[1]}-${version}_slack&dir;.${data[2]}
+        fi
         if [ ! -s "&pkg;/$file" ]; then
-          wget -nv -O &pkg;/$file &url;-&dir;/slackware/${data[0]}/$file
+          wget -nv -O &pkg;/$file $path/$file
         fi
         if [ -s "&pkg;/$file" ]; then
           upgradepkg --install-new &pkg;/$file

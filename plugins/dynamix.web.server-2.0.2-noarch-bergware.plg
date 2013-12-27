@@ -2,7 +2,7 @@
 
 <!DOCTYPE PLUGIN [
 <!ENTITY plugin "dynamix.web.server">
-<!ENTITY version "2.0.1">
+<!ENTITY version "2.0.2">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY rom "/boot/config/plugins/dynamix">
 <!ENTITY img "/boot/config/plugins/images">
@@ -10,7 +10,7 @@
 <!ENTITY log "/var/log/packages">
 <!ENTITY reg "/var/log/plugins">
 <!ENTITY src "https://raw.github.com/bergware/dynamix/master/download">
-<!ENTITY url "http://slackware.cs.utah.edu/pub/slackware/slackware">
+<!ENTITY url "http://slackware.cs.utah.edu/pub/slackware">
 <!ENTITY dir "13.37">   <!-- select slackware version for packages, see list below -->
 <!ENTITY prune "false"> <!-- set prune to "true" to activate pruning -->
 ]>
@@ -21,6 +21,7 @@ Copyright 2013, Bergware International
 Dynamix Web Server - Lighttpd 1.4.33 & PHP 5.3.27
 
 Version history:
+ 2013-12-27 - version 2.0.2 : Point release
  2013-12-21 - version 2.0.1 : Point release
  2013-12-01 - version 2.0.0 : First release
 
@@ -83,20 +84,20 @@ access="0"
 <FILE Name="/tmp/plugin-packages">
 <INLINE>
 # Mandatory packages     13.1                13.37             14.0              current
-a openssl-solibs  txz    0.9.8n-i486-1       0.9.8r-i486-3     1.0.1c-i486-3     1.0.1e-i486-1                   # openssl library
-n openssl         txz    0.9.8n-i486-1       0.9.8r-i486-3     1.0.1c-i486-3     1.0.1e-i486-1                   # openssl library
+a openssl-solibs  txz    0.9.8y-i486-1       0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1                   # openssl library
+n openssl         txz    0.9.8y-i486-1       0.9.8y-i486-1     1.0.1e-i486-1     1.0.1e-i486-1                   # openssl library
 d libtool         txz    2.2.6b-i486-2       2.4-i486-1        2.4.2-i486-1      2.4.2-i486-2                    # tools library
 d m4              txz    1.4.14-i486-1       1.4.16-i486-1     1.4.16-i486-1     1.4.17-i486-1                   # m4 library
 l libmcrypt       txz    2.5.8-i486-1        2.5.8-i486-1      2.5.8-i486-1      2.5.8-i486-1                    # mcrypt library
 l pcre            txz    8.02-i486-1         8.12-i486-1       8.12-i486-1       8.33-i486-1                     # pcre library
 
 # Recommended packages   13.1                13.37             14.0              current
-ap sqlite         txz    3.6.23.1-i486-1     3.7.5-i486-1      3.7.13-i486-1     3.7.17-i486-1                   # sqlite library (used by SQLITE extension)
+ap sqlite         txz    3.6.23.1-i486-1     3.7.5-i486-1      3.7.14.1-i486-1   3.7.17-i486-1                   # sqlite library (used by SQLITE extension)
 l libzip          txz    0.9-i486-2          0.9.3-i486-1      0.9.3-i486-1      0.10.1-i486-1                   # zip library (used by ZIP extension)
-l freetype        txz    2.3.12-i486-1       2.4.4-i486-1      2.4.10-i486-1     2.5.0.1-i486-1                  # freetype library (used by GD extension)
-l libjpeg         txz    v8a-i486-1          v8a-i486-1        v8a-i486-1        v8a-i486-2                      # jpeg library (used by GD extension)
-l libpng          txz    1.4.2-i486-1        1.4.5-i486-1      1.4.12-i486-1     1.4.12-i486-1                   # png library (used by GD extension)
-l t1lib           txz    5.1.2-i486-1        5.1.2-i486-2      5.1.2-i486-3      5.1.2-i486-3                    # t1 library (used by GD extension)
+l freetype        txz    2.4.11-i486-1       2.4.11-i486-1     2.4.11-i486-1     2.5.0.1-i486-1                  # freetype library (used by GD extension)
+l libjpeg         txz    v8a-i486-2          v8a-i486-2        v8a-i486-2        v8a-i486-2                      # jpeg library (used by GD extension)
+l libpng          txz    1.4.12-i486-1       1.4.12-i486-1     1.4.12-i486-1     1.4.12-i486-1                   # png library (used by GD extension)
+l t1lib           txz    5.1.2-i486-2        5.1.2-i486-3      5.1.2-i486-3      5.1.2-i486-3                    # t1 library (used by GD extension)
 x libxcb          txz    1.6-i486-1          1.7-i486-1        1.8.1-i486-1      1.9.1-i486-1                    # xcb library (used by GD extension)
 x libX11          txz    1.3.3-i486-1        1.4.3-i486-2      1.5.0-i486-1      1.6.2-i486-1                    # x11 library (used by GD extension)
 x libXau          txz    1.0.5-i486-1        1.0.6-i486-1      1.0.7-i486-1      1.0.8-i486-1                    # xau library (used by GD extension)
@@ -108,7 +109,7 @@ l aspell          txz    0.60.5-i486-2       0.60.6-i486-1     0.60.6-i486-1    
 l enchant         txz    1.5.0-i486-1        1.5.0-i486-1      1.5.0-i486-1      1.6.0-i486-1      no-install    # enchant library (used by ENCHANT extension)
 l libxslt         txz    1.1.26-i486-1       1.1.26-i486-1     1.1.26-i486-2     1.1.28-i486-1     no-install    # xslt library (used by XSL extension)
 a xz              tgz    4.999.9beta-i486-1  5.0.2-i486-1      5.0.4-i486-1      xz-5.0.5-i486-1   no-install    # xz utility (used by XSL extension)
-n curl            txz    7.20.1-i486-1       7.21.4-i486-1     7.27.0-i486-2     7.31.0-i486-1     no-install    # curl library (used by CURL extension)
+n curl            txz    7.20.1-i486-2       7.21.4-i486-2     7.29.0-i486-3     7.31.0-i486-1     no-install    # curl library (used by CURL extension)
 n net-snmp        txz    5.5-i486-2          5.6.1-i486-1      5.6.1-i486-5      5.7.2-i486-2      no-install    # snmp library (used by SNMP extension)
 </INLINE>
 </FILE>
@@ -256,9 +257,15 @@ install(){
            '14.0') version=${data[5]} ;;
         'current') version=${data[6]} ;;
         esac
-        file=${data[1]}-$version.${data[2]}
+        path=&url;/slackware-&dir;/slackware/${data[0]}
+        file=${data[1]}-${version}.${data[2]}
+        wget -q --spider $path/$file
+        if [ $? -ne 0 ]; then
+          path=&url;/slackware-&dir;/patches/packages
+          file=${data[1]}-${version}_slack&dir;.${data[2]}
+        fi
         if [ ! -s "&pkg;/$file" ]; then
-          wget -nv -O &pkg;/$file &url;-&dir;/slackware/${data[0]}/$file
+          wget -nv -O &pkg;/$file $path/$file
         fi
         if [ -s "&pkg;/$file" ]; then
           upgradepkg --install-new &pkg;/$file
