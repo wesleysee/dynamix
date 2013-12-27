@@ -1,8 +1,8 @@
 <?xml version='1.0' standalone='yes'?>
 
 <!DOCTYPE PLUGIN [
-<!ENTITY plugin "dynamix.disk.health">
-<!ENTITY version "2.0.1">
+<!ENTITY plugin "dynamix.system.temp">
+<!ENTITY version "2.0.2">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY rom "/boot/config/plugins/dynamix">
 <!ENTITY img "/boot/config/plugins/images">
@@ -15,18 +15,18 @@
 <PLUGIN>
 <!--
 Copyright 2013, Bergware International
-Dynamix Disk Health - Monitor S.M.A.R.T status of hard disks
+Dynamix System Temperature - Real-time monitoring of CPU and MB temperatures
 
 Version history:
+ 2013-12-27 - version 2.0.2 : Point release
  2013-12-21 - version 2.0.1 : Point release
  2013-12-01 - version 2.0.0 : First release
 
 Plugin file locations:
- /boot/config/plugins/dynamix.disk.health-0.0.0-noarch-bergware.plg       # this file
- /boot/config/plugins/dynamix/dynamix.disk.health-0.0.0-i486-1.txz        # executable code
- /boot/config/plugins/images/dynamix.disk.health.png                      # icon file
- /boot/config/plugins/dynamix/dynamix.disk.health.cfg                     # non-volatile settings
- /var/log/plugins/dynamix.disk.health                                     # plugin registration
+ /boot/config/plugins/dynamix.system.temp-0.0.0-noarch-bergware.plg       # this file
+ /boot/config/plugins/dynamix/dynamix.system.temp-0.0.0-i486-1.txz        # executable code
+ /boot/config/plugins/images/dynamix.system.temp.png                      # icon file
+ /var/log/plugins/dynamix.system.temp                                     # plugin registration
 -->
 
 <FILE Name="/tmp/plugin-startup" Run="/bin/bash">
@@ -45,12 +45,6 @@ fi
 # Remove this script
 rm -f /tmp/plugin-startup
 exit $code
-</INLINE>
-</FILE>
-
-<FILE Name="&rom;/&plugin;.cfg">
-<INLINE>
-poll="0"
 </INLINE>
 </FILE>
 

@@ -1,4 +1,11 @@
-## Dynamix v2.0.1
+## Dynamix v2.0.2
+
+#### Update
+
+Dynamix webGui has been updated to version 2.0.2. Thanks to the support of the unRAID community a number of fixes and improvements are introduced.
+See the file **changes.md** for a list of what has been changed, including changes in several optional plugins.
+All users of version 2.0.1 are encouraged to upgrade to this version.
+
 
 Dynamix webGui is a dynamic webGui for unRAID systems with enhanced features and optional add-ons.
 
@@ -23,6 +30,7 @@ Dynamix webGui requires an up-to-date browser version. It has been tested with t
 
 #### Installation
 
+This describes a first time installation, if you are upgrading from an older version, see the section 'Upgrading'.
 Dynamix webGui is considered a system plugin and is installed in the folder `/boot/plugins`.
 This ensures it gets installed first, before any other plugins, and the correct environment is created upfront.
 
@@ -32,13 +40,23 @@ This ensures it gets installed first, before any other plugins, and the correct 
 
 ```
 cd /boot/plugins
-wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.1-noarch-bergware.plg
+wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.2-noarch-bergware.plg
 ```
 
-- Alternatively: [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.1-noarch-bergware.plg) (right-click and select "save link as")
+- Alternatively: [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.2-noarch-bergware.plg) (right-click and select "save link as")
 
 - Reboot your server to start with a *clean* webGui environment.
 - You may need to clear your Browser's cache for correct viewing.
+
+#### Upgrading
+
+You can upgrade to a newer version of [Dynamix webGui](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.2-noarch-bergware.plg) (right-click and select "save link as")
+Save the file in `/boot/plugins` and type the below:
+
+```
+cd /boot/plugins
+installplg dynamix.webGui-2.0.2-noarch-bergware.plg.plg
+```
 
 #### Screenshots
 

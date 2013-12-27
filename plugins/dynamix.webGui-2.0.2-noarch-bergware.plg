@@ -2,7 +2,7 @@
 
 <!DOCTYPE PLUGIN [
 <!ENTITY plugin "dynamix.webGui">
-<!ENTITY version "2.0.1">
+<!ENTITY version "2.0.2">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY plg "/boot/plugins">
 <!ENTITY rom "/boot/config/plugins/dynamix">
@@ -19,6 +19,7 @@ Copyright 2013, Bergware International
 Dynamix webGui - Enhanced graphical interface for unRAID
 
 Version history:
+ 2013-12-27 - version 2.0.2 : Point release
  2013-12-21 - version 2.0.1 : Point release
  2013-12-01 - version 2.0.0 : First release
 
@@ -38,7 +39,7 @@ if [ ! -f &reg;/&plugin; ]; then
   rm -rf /usr/local/emhttp/plugins/webGui
 # Remove unRAID webGui upgrade plugin
   rm -rf /boot/config/plugins/webGui
-  rm -f /boot/plugins/webGui-latest.*
+  rm -f /boot/plugins/webGui-latest.*.plg
 fi
 # Prepare plugin
 rm -f $(ls &plg;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
