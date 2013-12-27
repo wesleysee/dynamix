@@ -8,6 +8,13 @@ cd /boot/config/plugins
 installplg <name-of-plugin>.plg
 ```
 
+If you are upgrading from an older version, do the following:
+```
+cd /boot/config/plugins
+rm <old-plugin-version>.plg
+installplg <new-plugin-version>.plg
+```
+
 [![](/download/dynamix.active.streams.png) Active Streams](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.active.streams-2.0.1-noarch-bergware.plg) - View in real-time which streams are currently open
 
 [![](/download/dynamix.cache.dirs.png) Cache Dirs](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.cache.dirs-2.0.1-noarch-bergware.plg) - Keep directories in RAM to prevent unnecessary disk spin-up
