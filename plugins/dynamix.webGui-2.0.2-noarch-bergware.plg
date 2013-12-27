@@ -39,7 +39,8 @@ if [ ! -f &reg;/&plugin; ]; then
   rm -rf /usr/local/emhttp/plugins/webGui
 # Remove unRAID webGui upgrade plugin
   rm -rf /boot/config/plugins/webGui
-  rm -f /boot/plugins/webGui-latest.*.plg
+  rm -f /boot/plugins/webGui-latest.plg
+  rm -f /boot/plugins/webGui-latest.txz
 fi
 # Prepare plugin
 rm -f $(ls &plg;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
