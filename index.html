@@ -33,18 +33,13 @@
 <a name="dynamix-v202" class="anchor" href="#dynamix-v202"><span class="octicon octicon-link"></span></a>Dynamix v2.0.2</h2>
 
 <h4><a name="update" class="anchor" href="#update"><span class="octicon octicon-link"></span></a>Update</h4>
-
 <p><em>Dynamix webGui has been updated to version 2.0.2. Thanks to the support of the unRAID community a number of fixes and improvements are introduced. See the file changes.md for a list of what has been changed, including changes in several optional plugins. All users of version 2.0.1 are encouraged to upgrade to this version.</em></p>
 
 <h4><a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h4>
-
 <p>Dynamix webGui is a dynamic webGui for unRAID systems with enhanced features and optional add-ons.</p>
-
 <p>Dynamix webGui is the next step in the evolution of the original SimpleFeatures enhanced webGui for unRAID systems.
 Its goal is to have pages dynamically updated and watch the operation of your unRAID server in real-time.</p>
-
 <p>Dynamix webGui offers a number of improvements not available before:</p>
-
 <ul>
 <li>Real-time page updates, the status view of your array is always up-to-date.</li>
 <li>Tabbed viewing, more efficient use of the available screen area, scrolling is hardly required.</li>
@@ -52,20 +47,14 @@ Its goal is to have pages dynamically updated and watch the operation of your un
 <li>Improved operability, no more accidental cancellations or wrong button clicking.</li>
 <li>Fully compatible with unRAID OS v5.0.</li>
 </ul>
-
 <p>Dynamix webGui completely replaces the stock unRAID GUI which comes with version 5.0, do <strong>not</strong> use Dynamix webGui on any earlier versions - including the earlier RC candidates of unRAID.</p>
-
 <p>Do <strong>not</strong> mix Dynamix and SimpleFeatures plugins, these are not compatible.</p>
-
 <p>Dynamix webGui requires an up-to-date browser version. It has been tested with the latest versions of Internet Explorer, Chrome, Firefox and Safari.</p>
 
 <h4><a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h4>
-
 <p><em>This describes a first time installation, if you are upgrading from an older version, see the section 'Upgrading'.</em></p>
-
 <p>Dynamix webGui is considered a system plugin and is installed in the folder <code>/boot/plugins</code>.
 This ensures it gets installed first, before any other plugins, and the correct environment is created upfront.</p>
-
 <ul>
 <li>Login to the command line on your server, e.g., at the console or a telnet session.</li>
 <li>Create the directory <code>/boot/plugins</code> directory, if it is not existing.</li>
@@ -73,80 +62,52 @@ This ensures it gets installed first, before any other plugins, and the correct 
 </ul><pre><code>cd /boot/plugins
 wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.2-noarch-bergware.plg
 </code></pre>
-
 <ul>
 <li><p>Alternatively: <a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.2-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.webGui.png" alt=""></a> (right-click and select "save link as")</p></li>
 <li><p>Reboot your server to start with a <em>clean</em> webGui environment.</p></li>
 <li>You may need to clear your Browser's cache for correct viewing.</li>
-</ul><h4>
-<a name="upgrading" class="anchor" href="#upgrading"><span class="octicon octicon-link"></span></a>Upgrading</h4>
+</ul>
 
+<h4><a name="upgrading" class="anchor" href="#upgrading"><span class="octicon octicon-link"></span></a>Upgrading</h4>
 <p>You can upgrade to the latest version of <a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.2-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.webGui.png" alt=""></a> (right-click and select "save link as")</p>
-
 <p>Save the file in <code>/boot/plugins</code> and type the below:</p>
-
 <pre><code>cd /boot/plugins
 rm dynamix.webGui-2.0.1-noarch-bergware.plg
 installplg dynamix.webGui-2.0.2-noarch-bergware.plg
 </code></pre>
 
 <h4><a name="optional-plugins" class="anchor" href="#optional-plugins"><span class="octicon octicon-link"></span></a>Optional plugins</h4>
-
 <p>The following plugins can be used to further enhance the functionality of Dynamix. They all require the Dynamix webGui to be present (installation of the add-on will be aborted when the webGui isn't detected). Right-click the links below and select "save link as". These plugins need to be placed in the directory <code>/boot/config/plugins</code>.</p>
-
 <p>To install the plugin after copying it, telnet to your unRAID server and type the following:</p>
-
 <pre><code>cd /boot/config/plugins
 installplg &lt;name-of-plugin&gt;.plg
 </code></pre>
-
 <p>If you are upgrading from an older version, do the following:</p>
-
 <pre><code>cd /boot/config/plugins
 rm &lt;old-plugin-version&gt;.plg
 installplg &lt;new-plugin-version&gt;.plg
 </code></pre>
-
 <p><a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.active.streams-2.0.1-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.active.streams.png" alt=""> Active Streams</a> - View in real-time which streams are currently open <em>(v2.0.1)</em></p>
-
 <p><a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.cache.dirs-2.0.1-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.cache.dirs.png" alt=""> Cache Dirs</a> - Keep directories in RAM to prevent unnecessary disk spin-up <em>(v2.0.1)</em></p>
-
 <p><a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.disk.health-2.0.2-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.disk.health.png" alt=""> Disk Health</a> - Display SMART information of your hard drives <em>(updated v2.0.2)</em></p>
-
 <p><a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.dns.server-2.0.1-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.dns.server.png" alt=""> DNS Server</a> - Run your own DNS server to maintain your local domain <em>(v2.0.1)</em></p>
-
 <p><a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.email.notify-2.0.2-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.email.notify.png" alt=""> Email Notify</a> - Receive periodic status updates by mail <em>(v2.0.2)</em></p>
-
 <p><a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.s3.sleep-2.0.1-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.s3.sleep.png" alt=""> S3 Sleep</a> - Put your system to sleep on predefined conditions <em>(v2.0.1)</em></p>
-
 <p><a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.info-2.0.1-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.system.info.png" alt=""> System Info</a> - Get detailed hardware information about your system <em>(v2.0.1)</em></p>
-
 <p><a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.stats-2.0.2-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.system.stats.png" alt=""> System Stats</a> - Maintain statistics about your drives and system <em>(updated v2.0.2)</em></p>
-
 <p><a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.temp-2.0.2-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.system.temp.png" alt=""> System Temp</a> - View in real-time CPU and motherboard temperatures <em>(updated v2.0.2)</em></p>
-
 <p><a href="https://raw.github.com/bergware/dynamix/master/plugins/dynamix.web.server-2.0.2-noarch-bergware.plg"><img src="https://raw.github.com/bergware/dynamix/master/download/dynamix.web.server.png" alt=""> Web Server</a> - Run your own web server, including PHP <em>(v2.0.2)</em></p>
 
 <h4><a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots</h4>
-
 <p>The main screen shows the different devices in separate tabs. The current screen is updated in real-time. Click on the tab header to move between screens.</p>
-
 <p><img src="https://raw.github.com/bergware/dynamix/master/screenshots/main-array.png" alt=""></p>
-
 <p>The operation of the array (e.g. parity-check) can be viewed in real-time as well. When a parity-check is ongoing the statusbar at the bottom shows the current status in any screen. Note also the disabling of buttons to avoid accidental mis-clicking!</p>
-
 <p><img src="https://raw.github.com/bergware/dynamix/master/screenshots/main-paritycheck.png" alt=""></p>
-
 <p>Settings are logically grouped. This not only removes the clutter of a busy screen, but makes it also easier to find your way.</p>
-
 <p><img src="https://raw.github.com/bergware/dynamix/master/screenshots/settings.png" alt=""></p>
-
 <p>Monospace font is made more readable, both for main screen and popup screens.</p>
-
 <p><img src="https://raw.github.com/bergware/dynamix/master/screenshots/system-log.png" alt=""></p>
-
 <p>The Browser function has been rewritten for improved speed and visibility of duplicate files. These are clearly indicated by displaying them in orange.</p>
-
 <p><img src="https://raw.github.com/bergware/dynamix/master/screenshots/duplicates.png" alt=""></p>
       </section>
       <footer>
@@ -154,6 +115,5 @@ installplg &lt;new-plugin-version&gt;.plg
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
   </body>
 </html>
