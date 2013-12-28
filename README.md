@@ -5,6 +5,8 @@
 *Dynamix webGui has been updated to version 2.0.2. Thanks to the support of the unRAID community a number of fixes and improvements are introduced. See the file changes.md for a list of what has been changed, including changes in several optional plugins. All users of version 2.0.1 are encouraged to upgrade to this version.*
 
 
+#### Introduction
+
 Dynamix webGui is a dynamic webGui for unRAID systems with enhanced features and optional add-ons.
 
 Dynamix webGui is the next step in the evolution of the original SimpleFeatures enhanced webGui for unRAID systems.
@@ -17,8 +19,6 @@ Dynamix webGui offers a number of improvements not available before:
 - Improved visibility, better readibility and consistency of the sans-serif and monospace fonts in different browsers.
 - Improved operability, no more accidental cancellations or wrong button clicking.
 - Fully compatible with unRAID OS v5.0.
-
-#### Introduction
 
 Dynamix webGui completely replaces the stock unRAID GUI which comes with version 5.0, do **not** use Dynamix webGui on any earlier versions - including the earlier RC candidates of unRAID.
 
