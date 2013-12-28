@@ -1,6 +1,6 @@
 #### Optional plugins
 
-The following plugins can be used to further enhance the functionality of Dynamix. They all require the Dynamix webGui to be installed (installation of the add-on will be aborted when the webGui isn't detected). Right-click the links below and select "save link as". These plugins need to be placed in the directory `/boot/config/plugins`.
+The following plugins can be used to further enhance the functionality of Dynamix. They all require the Dynamix webGui to be present (installation of the add-on will be aborted when the webGui isn't detected). Right-click the links below and select "save link as". These plugins need to be placed in the directory `/boot/config/plugins`.
 
 To install the plugin after copying it, telnet to your unRAID server and type the following:
 ```
