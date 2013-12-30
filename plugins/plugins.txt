@@ -1,33 +1,33 @@
-plugin="dynamix.webGui"
+[dynamix.webGui]
 version="2.0.3"
 description="Dynamic graphical interface for unRAID media server"
-plugin="dynamix.active.streams"
+[dynamix.active.streams]
 version="2.0.3"
 description="View in real-time which streams are currently open"
-plugin="dynamix.cache.dirs"
+[dynamix.cache.dirs]
 version="2.0.3"
 description="Keep directories in RAM to prevent unnecessary disk spin-up"
-plugin="dynamix.disk.health"
+[dynamix.disk.health]
 version="2.0.3"
 description="Display SMART information of your hard drives"
-plugin="dynamix.dns.server"
+[dynamix.dns.server]
 version="2.0.3"
 description="Run your own DNS server to maintain your local domain"
-plugin="dynamix.email.notify"
+[dynamix.email.notify]
 version="2.0.3"
 description="Receive periodic status updates by mail"
-plugin="dynamix.s3.sleep"
+[dynamix.s3.sleep]
 version="2.0.3"
 description="Put your system to sleep on predefined conditions"
-plugin="dynamix.system.info"
+[dynamix.system.info]
 version="2.0.3"
 description="Get detailed hardware information about your system"
-plugin="dynamix.system.stats"
+[dynamix.system.stats]
 version="2.0.3"
 description="Maintain statistics about your drives and system"
-plugin="dynamix.system.temp"
+[dynamix.system.temp]
 version="2.0.3"
 description="View in real-time CPU and motherboard temperatures"
-plugin="dynamix.web.server"
+[dynamix.web.server]
 version="2.0.3"
 description="Run your own web server, including PHP"
