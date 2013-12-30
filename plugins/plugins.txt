@@ -1,33 +1,44 @@
 [dynamix.webGui]
 version="2.0.3"
 description="Dynamic graphical interface for unRAID media server"
+author="Bergware"
 [dynamix.active.streams]
 version="2.0.3"
 description="View in real-time which streams are currently open"
+author="Bergware"
 [dynamix.cache.dirs]
 version="2.0.3"
 description="Keep directories in RAM to prevent unnecessary disk spin-up"
+author="Bergware"
 [dynamix.disk.health]
 version="2.0.3"
 description="Display SMART information of your hard drives"
+author="Bergware"
 [dynamix.dns.server]
 version="2.0.3"
 description="Run your own DNS server to maintain your local domain"
+author="Bergware"
 [dynamix.email.notify]
 version="2.0.3"
 description="Receive periodic status updates by mail"
+author="Bergware"
 [dynamix.s3.sleep]
 version="2.0.3"
 description="Put your system to sleep on predefined conditions"
+author="Bergware"
 [dynamix.system.info]
 version="2.0.3"
 description="Get detailed hardware information about your system"
+author="Bergware"
 [dynamix.system.stats]
 version="2.0.3"
 description="Maintain statistics about your drives and system"
+author="Bergware"
 [dynamix.system.temp]
 version="2.0.3"
+author="Bergware"
 description="View in real-time CPU and motherboard temperatures"
 [dynamix.web.server]
 version="2.0.3"
 description="Run your own web server, including PHP"
+author="Bergware"
