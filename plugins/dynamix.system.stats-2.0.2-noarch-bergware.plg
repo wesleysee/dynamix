@@ -40,10 +40,12 @@ if [ -f /var/log/plugins/dynamix.webGui ]; then
   rm -f &reg;/&plugin;
   rm -f /tmp/plugin-install
   rm -f /etc/rc.d/rc.sysstat
+# Proceed
   code=0
 else
 # Dynamix webGui not present
   echo "missing Dynamix webGui plugin !!!"
+# Terminate
   code=1
 fi
 # Remove this script

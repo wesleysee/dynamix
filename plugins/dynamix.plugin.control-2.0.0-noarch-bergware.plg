@@ -1,8 +1,8 @@
 <?xml version='1.0' standalone='yes'?>
 
 <!DOCTYPE PLUGIN [
-<!ENTITY plugin "dynamix.system.info">
-<!ENTITY version "2.0.1">
+<!ENTITY plugin "dynamix.plugin.control">
+<!ENTITY version "2.0.0">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY rom "/boot/config/plugins/dynamix">
 <!ENTITY img "/boot/config/plugins/images">
@@ -15,17 +15,16 @@
 <PLUGIN>
 <!--
 Copyright 2013, Bergware International
-dynamix System Information - System details
+Dynamix Plugin Control - Install, Update and Uninstall Dynamix plugins via GUI
 
 Version history:
- 2013-12-21 - version 2.0.1 : Point release
- 2013-12-01 - version 2.0.0 : First release
+ 2013-12-31 - version 2.0.0 : First release
 
 Plugin file locations:
- /boot/config/plugins/dynamix.system.info-0.0.0-noarch-bergware.plg       # this file
- /boot/config/plugins/dynamix/dynamix.system.info-0.0.0-i486-1.txz        # executable code
- /boot/config/plugins/images/dynamix.system.info.png                      # icon file
- /var/log/plugins/dynamix.system.info                                     # plugin registration
+ /boot/config/plugins/dynamix.plugin.control-0.0.0-noarch-bergware.plg    # this file
+ /boot/config/plugins/dynamix/dynamix.plugin.control-0.0.0-i486-1.txz     # executable code
+ /boot/config/plugins/images/dynamix.plugin.control.png                   # icon file
+ /var/log/plugins/dynamix.plugin.control                                  # plugin registration
 -->
 
 <FILE Name="/tmp/plugin-startup" Run="/bin/bash">
@@ -49,6 +48,11 @@ exit $code
 </INLINE>
 </FILE>
 
+<FILE Name="&rom;/&plugin;.cfg">
+<INLINE>
+</INLINE>
+</FILE>
+
 <FILE Name="&rom;/&plugin;-&version;-i486-1.txz" Run="upgradepkg --install-new">
 <URL>--no-check-certificate &src;/&plugin;-&version;-i486-1.txz</URL>
 </FILE>
@@ -63,7 +67,6 @@ exit $code
 
 <FILE Name="/tmp/plugin-install" Run="/bin/bash">
 <INLINE>
-ini="&rom;/&plugin;.cfg"
 echo "executing !"
 
 # Update file access mode

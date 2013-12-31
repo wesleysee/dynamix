@@ -37,10 +37,12 @@ if [ -f /var/log/plugins/dynamix.webGui ]; then
   rm -f $(ls &rom;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
   rm -f &reg;/&plugin;
   rm -f /tmp/plugin-install
+# Proceed
   code=0
 else
 # Dynamix webGui not present
   echo "missing Dynamix webGui plugin !!!"
+# Terminate
   code=1
 fi
 # Remove this script

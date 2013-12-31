@@ -44,10 +44,18 @@ if [ -f /var/log/plugins/dynamix.webGui ]; then
   rm -f /etc/rc.d/rc.cachedirs
   rm -f &gui;/dynamix/event/disks_mounted.&plugin;
   rm -f &gui;/dynamix/event/unmounting_disks.&plugin;
+# Stop service
+  process=/usr/local/sbin/cache_dirs
+  pid=$(pidof -s -x $process)
+  if [ -n "$pid" ]; then
+    $process -q 1>/dev/null 2>&amp;1
+  fi
+# Proceed
   code=0
 else
 # Dynamix webGui not present
   echo "missing Dynamix webGui plugin !!!"
+# Terminate
   code=1
 fi
 # Remove this script
@@ -154,6 +162,12 @@ fi
 <INLINE>
 ini="&rom;/&plugin;.cfg"
 echo "executing !"
+
+# Start service
+enable=$(grep "^service=" $ini | cut -d'"' -f2)
+if [ "$enable" == "1" ]; then
+  /etc/rc.d/rc.cachedirs start >/dev/null
+fi
 
 # Update file access mode
 chmod 600 $(awk '/(\.htm$|\.php$|\.js$|\.page$|\.css$|\.png$|\.gif$)/ {print "/"$0}' &log;/&plugin;-&version;-i486-1)

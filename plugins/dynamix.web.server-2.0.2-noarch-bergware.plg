@@ -58,10 +58,18 @@ if [ -f /var/log/plugins/dynamix.webGui ]; then
   rm -f &gui;/dynamix/event/unmounting_disks.&plugin;
 # Prepare packages
   rm -f /tmp/plugin-packages
+# Stop service
+  process="/usr/sbin/lighttpd"
+  pid=$(pidof -s -x $process)
+  if [ -n "$pid" ]; then
+    pkill -f $process 1>/dev/null 2>&amp;1
+  fi  
+# Proceed
   code=0
 else
 # Dynamix webGui not present
   echo "missing Dynamix webGui plugin !!!"
+# Terminate
   code=1
 fi
 # Remove this script

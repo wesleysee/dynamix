@@ -41,10 +41,18 @@ if [ -f /var/log/plugins/dynamix.webGui ]; then
   rm -f &reg;/&plugin;
   rm -f /tmp/plugin-install
   rm -f /etc/rc.d/rc.dnsmasq
+# Stop service
+  process=/usr/local/sbin/dnsmasq
+  pid=$(pidof -s -x $process)
+  if [ -n "$pid" ]; then
+    pkill -f $process 1>/dev/null 2>&amp;1
+  fi
+# Proceed
   code=0
 else
 # Dynamix webGui not present
   echo "missing Dynamix webGui plugin !!!"
+# Terminate
   code=1
 fi
 # Remove this script

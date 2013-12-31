@@ -44,10 +44,12 @@ if [ -f /var/log/plugins/dynamix.webGui ]; then
   rm -f /etc/rc.d/rc.s3sleep
   rm -f &gui;/dynamix/event/disks_mounted.&plugin;
   rm -f &gui;/dynamix/event/unmounting_disks.&plugin;
+# Proceed
   code=0
 else
 # Dynamix webGui not present
   echo "missing Dynamix webGui plugin !!!"
+# Terminate
   code=1
 fi
 # Remove this script
