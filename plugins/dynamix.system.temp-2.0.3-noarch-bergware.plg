@@ -119,6 +119,11 @@ install(){
 # Install external packages
 install /tmp/plugin-packages &prune;
 
+# Copy custom sensors file
+if [ -s "&rom;/sensors.conf" ]; then
+  cp -f &rom;/sensors.conf /etc/sensors.d
+fi
+
 # Update file access mode
 chmod 600 $(awk '/(\.htm$|\.php$|\.js$|\.page$|\.css$|\.png$|\.gif$)/ {print "/"$0}' &log;/&plugin;-&version;-i486-1)
 
