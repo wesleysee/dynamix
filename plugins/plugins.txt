@@ -9,7 +9,7 @@ version="2.0.1"
 description="View in real-time which streams are currently open"
 author="Bergware"
 reboot="n"
-refresh="n"
+refresh="y"
 [dynamix.cache.dirs]
 version="2.0.1"
 description="Keep directories in RAM to prevent unnecessary disk spin-up"
