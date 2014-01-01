@@ -2,6 +2,7 @@ Release notes v2.0.4
 ====================
 Changed: ball icon colors
 Added: support for release notes in plugin.control
+Fixed: css error in share table
 
 Release notes v2.0.3
 ====================
