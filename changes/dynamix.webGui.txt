@@ -1,7 +1,7 @@
 Release notes v2.0.4
 ====================
 Changed: ball icon colors
-Added: support of release notes in plugin.control
+Added: support for release notes in plugin.control
 
 Release notes v2.0.3
 ====================
