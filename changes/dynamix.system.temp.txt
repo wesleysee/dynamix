@@ -1,6 +1,7 @@
 Release notes v2.0.3
 ====================
 Fixed: display of unavailable temp
+Fixed: CPU/MB temps may be reversed
 Added: copy of custom sensors.conf file
 
 Release notes v2.0.2
