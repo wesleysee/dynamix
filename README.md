@@ -82,7 +82,7 @@ rm <old-plugin-version>.plg
 installplg <new-plugin-version>.plg
 ```
 
-[![](/download/dynamix.plugin.control.png) Plugin Control](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.plugin.control-2.0.1-noarch-bergware.plg) - Install, Update and Uninstall plugins via the GUI *(new v2.0.1)*
+[![](/download/dynamix.plugin.control.png) Plugin Control](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.plugin.control-2.0.1-noarch-bergware.plg) - Install, Update and Uninstall Dynamix plugins via the GUI *(new v2.0.1)*
 
 [![](/download/dynamix.active.streams.png) Active Streams](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.active.streams-2.0.1-noarch-bergware.plg) - View in real-time which streams are currently open *(v2.0.1)*
 
