@@ -18,7 +18,7 @@ Copyright 2013, Bergware International
 Dynamix Plugin Control - Install, Update and Uninstall Dynamix plugins via GUI
 
 Version history:
- 2013-12-31 - version 2.0.0 : First release
+ 2013-12-31 - version 2.0.0 : Initial release
 
 Plugin file locations:
  /boot/config/plugins/dynamix.plugin.control-0.0.0-noarch-bergware.plg    # this file

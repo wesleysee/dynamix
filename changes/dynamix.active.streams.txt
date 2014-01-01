@@ -1,0 +1,12 @@
+Release notes v2.0.0
+====================
+Initial version
+
+Release notes v2.0.1
+====================
+Public release
+
+Release notes v2.0.2
+====================
+Fixed: column width of IP address
+Fixed: list of user names

@@ -20,8 +20,8 @@ Dynamix webGui - Enhanced graphical interface for unRAID
 
 Version history:
  2013-12-27 - version 2.0.2 : Point release
- 2013-12-21 - version 2.0.1 : Point release
- 2013-12-01 - version 2.0.0 : First release
+ 2013-12-21 - version 2.0.1 : Public release
+ 2013-12-01 - version 2.0.0 : Initial release
 
 Plugin file locations:
  /boot/plugins/dynamix.webGui-0.0.0-noarch-bergware.plg                   # this file

@@ -22,8 +22,8 @@ Dynamix Web Server - Lighttpd 1.4.33 & PHP 5.3.27
 
 Version history:
  2013-12-27 - version 2.0.2 : Point release
- 2013-12-21 - version 2.0.1 : Point release
- 2013-12-01 - version 2.0.0 : First release
+ 2013-12-21 - version 2.0.1 : Public release
+ 2013-12-01 - version 2.0.0 : Initial release
 
 Plugin file locations:
  /boot/config/plugins/dynamix.web.server-0.0.0-noarch-bergware.plg        # this file

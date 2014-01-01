@@ -1,0 +1,25 @@
+Release notes v2.0.0
+====================
+Initial version
+
+Release notes v2.0.1
+====================
+Public release
+
+Release notes v2.0.2
+====================
+Added: passive refresh mode support
+Added: refresh button on each device tab
+Added: attention message in bonding mode selection
+Fixed: FTP user name typo
+Fixed: unRAID webGui upgrade plugin removal
+Changed: combined spin up/down and color info popup
+
+Release notes v2.0.3
+====================
+Fixed: color info popup on top
+Changed: text on total row
+
+Release notes v2.0.4
+====================
+Changed: ball icon colors
