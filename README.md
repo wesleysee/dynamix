@@ -126,3 +126,7 @@ Monospace font is made more readable, both for main screen and popup screens.
 The Browser function has been rewritten for improved speed and visibility of duplicate files. These are clearly indicated by displaying them in orange.
 
 ![](/screenshots/duplicates.png)
+
+The optional "plugin control" module allows for easy installation, updating and uninstallation of all of the available Dynamix plugins via the GUI. This way maintaining your plugins becomes a breeze!
+
+![](/screenshots/plugin-control.png)
