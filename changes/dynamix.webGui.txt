@@ -23,3 +23,4 @@ Changed: text on total row
 Release notes v2.0.4
 ====================
 Changed: ball icon colors
+Added: support of release notes in plugin.control

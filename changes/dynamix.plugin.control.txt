@@ -5,3 +5,4 @@ Public release
 Release notes v2.0.1
 ====================
 Added: links to setting pages
+Added: display of release notes after upgrade
