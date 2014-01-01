@@ -1,11 +1,11 @@
-Release notes v2.0.0
+Release notes v2.0.2
 ====================
-Initial release
+Added: passive refresh mode support
 
 Release notes v2.0.1
 ====================
 Public release
 
-Release notes v2.0.2
+Release notes v2.0.0
 ====================
-Added: passive refresh mode support
+Initial release
