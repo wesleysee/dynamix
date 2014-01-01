@@ -1,6 +1,6 @@
 Release notes v2.0.0
 ====================
-Initial version
+Initial release
 
 Release notes v2.0.1
 ====================
