@@ -1,8 +1,8 @@
 <?xml version='1.0' standalone='yes'?>
 
 <!DOCTYPE PLUGIN [
-<!ENTITY plugin "dynamix.disk.health">
-<!ENTITY version "2.0.2">
+<!ENTITY plugin "dynamix.plugin.control">
+<!ENTITY version "2.0.0">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY rom "/boot/config/plugins/dynamix">
 <!ENTITY img "/boot/config/plugins/images">
@@ -15,19 +15,16 @@
 <PLUGIN>
 <!--
 Copyright 2013, Bergware International
-Dynamix Disk Health - Monitor S.M.A.R.T status of hard disks
+Dynamix Plugin Control - Install, Update and Uninstall Dynamix plugins via GUI
 
 Version history:
- 2013-12-27 - version 2.0.2 : Point release
- 2013-12-21 - version 2.0.1 : Public release
- 2013-12-01 - version 2.0.0 : Initial release
+ 2013-12-31 - version 2.0.0 : Initial release
 
 Plugin file locations:
- /boot/config/plugins/dynamix.disk.health-0.0.0-noarch-bergware.plg       # this file
- /boot/config/plugins/dynamix/dynamix.disk.health-0.0.0-i486-1.txz        # executable code
- /boot/config/plugins/images/dynamix.disk.health.png                      # icon file
- /boot/config/plugins/dynamix/dynamix.disk.health.cfg                     # non-volatile settings
- /var/log/plugins/dynamix.disk.health                                     # plugin registration
+ /boot/config/plugins/dynamix.plugin.control-0.0.0-noarch-bergware.plg    # this file
+ /boot/config/plugins/dynamix/dynamix.plugin.control-0.0.0-i486-1.txz     # executable code
+ /boot/config/plugins/images/dynamix.plugin.control.png                   # icon file
+ /var/log/plugins/dynamix.plugin.control                                  # plugin registration
 -->
 
 <FILE Name="/tmp/plugin-startup" Run="/bin/bash">
@@ -53,7 +50,6 @@ exit $code
 
 <FILE Name="&rom;/&plugin;.cfg">
 <INLINE>
-poll="0"
 </INLINE>
 </FILE>
 
@@ -71,7 +67,6 @@ poll="0"
 
 <FILE Name="/tmp/plugin-install" Run="/bin/bash">
 <INLINE>
-ini="&rom;/&plugin;.cfg"
 echo "executing !"
 
 # Update file access mode

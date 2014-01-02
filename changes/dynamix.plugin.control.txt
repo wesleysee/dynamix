@@ -1,0 +1,8 @@
+Release notes v2.0.1
+====================
+Added: links to setting pages
+Added: display of release notes after upgrade
+
+Release notes v2.0.0
+====================
+Public release

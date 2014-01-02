@@ -1,7 +1,7 @@
 <?xml version='1.0' standalone='yes'?>
 
 <!DOCTYPE PLUGIN [
-<!ENTITY plugin "dynamix.disk.health">
+<!ENTITY plugin "dynamix.active.streams">
 <!ENTITY version "2.0.2">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY rom "/boot/config/plugins/dynamix">
@@ -15,7 +15,7 @@
 <PLUGIN>
 <!--
 Copyright 2013, Bergware International
-Dynamix Disk Health - Monitor S.M.A.R.T status of hard disks
+Dynamix Active Streams - Real-time monitoring of SMB shares
 
 Version history:
  2013-12-27 - version 2.0.2 : Point release
@@ -23,11 +23,11 @@ Version history:
  2013-12-01 - version 2.0.0 : Initial release
 
 Plugin file locations:
- /boot/config/plugins/dynamix.disk.health-0.0.0-noarch-bergware.plg       # this file
- /boot/config/plugins/dynamix/dynamix.disk.health-0.0.0-i486-1.txz        # executable code
- /boot/config/plugins/images/dynamix.disk.health.png                      # icon file
- /boot/config/plugins/dynamix/dynamix.disk.health.cfg                     # non-volatile settings
- /var/log/plugins/dynamix.disk.health                                     # plugin registration
+ /boot/config/plugins/dynamix.active.streams-0.0.0-noarch-bergware.plg    # this file
+ /boot/config/plugins/dynamix/dynamix.active.streams-0.0.0-i486-1.txz     # executable code
+ /boot/config/plugins/images/dynamix.active.streams.png                   # icon file
+ /boot/config/plugins/dynamix/dynamix.active.streams.cfg                  # non-volatile settings
+ /var/log/plugins/dynamix.active.streams                                  # plugin registration
 -->
 
 <FILE Name="/tmp/plugin-startup" Run="/bin/bash">
@@ -53,7 +53,6 @@ exit $code
 
 <FILE Name="&rom;/&plugin;.cfg">
 <INLINE>
-poll="0"
 </INLINE>
 </FILE>
 

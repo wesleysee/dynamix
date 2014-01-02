@@ -2,7 +2,7 @@
 
 <!DOCTYPE PLUGIN [
 <!ENTITY plugin "dynamix.webGui">
-<!ENTITY version "2.0.2">
+<!ENTITY version "2.0.3">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY plg "/boot/plugins">
 <!ENTITY rom "/boot/config/plugins/dynamix">
@@ -19,6 +19,7 @@ Copyright 2013, Bergware International
 Dynamix webGui - Enhanced graphical interface for unRAID
 
 Version history:
+ 2013-12-31 - version 2.0.3 : Point release
  2013-12-27 - version 2.0.2 : Point release
  2013-12-21 - version 2.0.1 : Public release
  2013-12-01 - version 2.0.0 : Initial release
@@ -137,7 +138,7 @@ echo "-----------------------------------------------------------"
 echo " &plugin; has been installed."
 echo ""
 echo " Created by Bergware International"
-echo " Dynamic graphical interface for unRAID file server"
+echo " Dynamic graphical interface for unRAID media server"
 echo " Copyright 2013, Bergware International"
 echo " Version: &version;"
 echo "-----------------------------------------------------------"
