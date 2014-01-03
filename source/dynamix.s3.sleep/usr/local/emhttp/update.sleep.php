@@ -4,16 +4,10 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- * 2013/12/29 SlrG added feature to include/exclude drives outside of array
  */
 ?>
 <?
-if (isset ($_GET['excludeList'])) {
-  $excludeList = $_GET['excludeList'];
-  $excludeString = implode (",",$excludeList);
-}
 foreach ($_GET as $key => $value) {
-  if ("$key" == "excludeList") $value = $excludeString;
   if (!strlen($value)) continue;
   switch ($key) {
   case '#config':
@@ -32,13 +26,6 @@ foreach ($_GET as $key => $value) {
   case 'service':
     $enable = ($value != '0');
     if ($enable) $options .= "-C $value ";
-    break;
-  case 'exclude':
-    $options .= "$value ";
-    break;
-  case 'excludeList':
-    $options .= "$value ";
-    $_GET[$key] = $value;
     break;
   case 'preRun':
     file_put_contents($preRun, "#!/bin/bash\n".str_replace("\r","",$value));

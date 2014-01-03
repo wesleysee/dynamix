@@ -4,7 +4,6 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- * 2013/12/29 SlrG added feature to include/exclude drives outside of array
  */
 ?>
 <?
@@ -17,10 +16,6 @@ $folder = "/usr/local/bin";
 
 unset($sPorts);
 exec("ifconfig -s | awk '$1~/[0-9]$/ {print $1}'", &$sPorts);
-
-unset($sExcludeList);
-exec("$fName -ED", &$sExcludeList);
-
 $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 ?>
 <script>
@@ -30,33 +25,8 @@ $(function() {
   $.ajax({url:'/plugins/webGui/include/ProcessStatus.php',data:'name=<?=$sName?>',success:function(status) {$('.tabs').append(status);}});
   presetSleep(document.sleep_settings);
 });
-<?if (array_filter($sExcludeList)):?>
-function resetSelected() {
-  names = document.getElementsByName (' selected');
-  for (var x=0; x < names.length; x++)
-    names[x].selected=true;
-}
-
-function countSelected(id){
-  var options = document.getElementById(id).options;
-  count = 0;
-
-  for (var i=0; i < options.length; i++) {
-    if (options[i].selected) count++;
-  }
-  return count;
-}
-<?endif;?>
 
 function prepareSleep(form) {
-<?if (array_filter($sExcludeList)):?>
-  var sindex = form.exclude.selectedIndex;
-  if ((sindex==1 || sindex==2) && countSelected('excludeList') == 0) {
-    form.exclude.scrollIntoView();
-    alert ("Please select at least one drive to exclude/include!");
-    return false;
-  }
-<?endif;?>
   var days = '';
   for (var i=0,item; item=form.stopDay.options[i]; i++) {
     if (item.selected) {
@@ -92,17 +62,11 @@ function presetSleep(form) {
   form.service.disabled = false;
   $("#s1").dropdownchecklist(onOff);
   $("#s2").dropdownchecklist(onOff);
-  if (!disabled) {
-<?if (array_filter($sExcludeList)):?>
-    changeExclude(form);
-<?endif;?>
-    changeIdle(form); 
-    changePort(form);
-  }
+  if (!disabled) {changeIdle(form); changePort(form);}
   logNote(form);
-  return true;
 }
 function resetSleep(form) {
+  form.checkHDD.selectedIndex = 1;
   form.timeout.value = 30;
   form.checkTCP.selectedIndex = 0;
   form.idle.value = 0;
@@ -117,25 +81,9 @@ function resetSleep(form) {
   form.preRun.value = '';
   form.postRun.value = '';
   form.debug.selectedIndex = 0;
-  form.checkHDD.selectedIndex = 1;
-<?if (array_filter($sExcludeList)):?>
-  form.exclude.selectedIndex = 0;
-  changeExclude(form);
-<?endif;?>
   changeIdle(form);
   logNote(form);
 }
-<?if (array_filter($sExcludeList)):?>
-function changeExclude(form) {
-  var sindex = form.exclude.selectedIndex;
-  var disabled = (sindex == 0 || sindex == 3);
-  if (disabled)
-    document.getElementById('excludeList').selectedIndex = -1;
-  else
-    resetSelected();
-  document.getElementById('excludeList').disabled = disabled;
-}
-<?endif;?>
 function changeIdle(form) {
   var disabled = form.checkTCP.value=='';
   form.idle.disabled = disabled;
@@ -150,7 +98,7 @@ function logNote(form) {
   if (note==1 || note==3) {$("#note").show();} else {$("#note").hide();}
 }
 </script>
-<form name="sleep_settings" method="POST" action="/update.php" target="progressFrame" onsubmit="return prepareSleep(this)">
+<form name="sleep_settings" method="POST" action="/update.php" target="progressFrame" onsubmit="prepareSleep(this)">
 <input type="hidden" name="#plugin"  value="<?=$plugin?>">
 <input type="hidden" name="#include" value="update.sleep.php">
 <input type="hidden" name="#config"  value="<?=$config?>">
@@ -189,34 +137,6 @@ function logNote(form) {
 <?endif;?>
   </select></td>
   </tr>
-<?if (array_filter($sExcludeList)):?>
-  <tr><td>Exclude disks outside array:</td>
-    <td><select name="exclude" size="1" onChange="changeExclude(this.form)">
-    <?=mk_option($ini['exclude'], "", "No")?>
-    <?=mk_option($ini['exclude'], "-A -E", "Only selected")?>
-    <?=mk_option($ini['exclude'], "-A -I", "All, but selected")?>
-    <?=mk_option($ini['exclude'], "-A", "All")?>
-    </select></td>
-  </tr>
-  <tr><td></td><td><select id="excludeList" name="excludeList[]" width="320" style="width:320px;" multiple>
-  <?
-  $excludesMarked = $ini['excludeList'];
-  $excludesMarkedArray = explode (",", $excludesMarked);
-  foreach ($sExcludeList as $excludeOption){
-    $selected = "";
-    foreach ($excludesMarkedArray as $string){
-      if (strpos($excludeOption, $string) !== false) $selected = " selected";
-    }
-    $parts = explode ("|", $excludeOption);
-    echo ("<option name=\"$selected\" value=\"$parts[1]\"$selected>$excludeOption</option>\n");
-  }
-  ?>
-    </select>Multiselect with &lt;Ctrl&gt; or &lt;Shift&gt; key.</td>
-  </tr>
-<?else:?>
-  <input type="hidden" name="exclude" value="">
-  <input type="hidden" name="excludeList" value="">
-<?endif;?>
   <tr><td>Extra delay after array inactivity (minutes):</td>
   <td><input type="text" name="timeout" maxlength="2" value="<?=$ini['timeout']?>">default = 30 minutes</td>
   </tr>

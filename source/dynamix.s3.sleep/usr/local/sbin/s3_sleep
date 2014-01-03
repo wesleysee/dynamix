@@ -25,75 +25,18 @@
 #                 Added -N option to set idle threshold for TCP monitoring
 #                 Added -D option to allow debugging (troubleshooting)
 #                 Based on suggestions made by 'Bagpuss'
-# Version 2.1.1   SlrG added feature to include/exclude drives outside of array
 #
 # Bergware International
 ####################################################################################
-version=2.1.1
+version=2.1.0
 program_name=`basename $0`
-
-# Get device ID of flash drive
-getflashdrive(){
-  flash=/dev/$(ls -l /dev/disk/by-label | awk -F/ '/UNRAID/ {print $3}' | cut -c1-3)
-  }
-
-# Get device ID of cache (if present)
-getcachedrive(){
-  cdrive=$(awk '/\/mnt\/cache/ {print $1}' /proc/mounts | cut -c1-8)
-  if [ -z "$cache" ]; then
-    cache="$cdrive"
-    [ -z "$cache" ] && cache="-"
-  fi
-}
-
-# Get list of array devices
-getdevicelist(){
-  devicelist=()
-  while read ini
-  do
-    case $ini in
-      rdevName.*)
-        device=${ini#*=}
-        if [ ! "/dev/$device" == "/dev/" ]; then
-          devicelist+=("/dev/$device ")
-        fi
-    esac
-  done < /proc/mdcmd
-}
-
-# Get list of all drives
-getdrivelist(){
-  drivelist=( $(ls -l /dev/disk/by-id/[au]* | grep -v part1 | sed 's/.*id\///g' | sed 's/-> ..\/..\//\/dev\//g' | awk '{ print $2 "|" $1}' | sort -k1) )
-  drivelist=$(echo "${drivelist[@]}" | tr '\n' ' ')
-}
-
-if [ "$1" == "-ED" ]; then
-  # Generate device list including flash and cache
-  getflashdrive
-  getcachedrive
-  getdevicelist
-  devicelist+=("$flash");
-  devicelist+=("$cache");
-  devicelist=( $(echo "${devicelist[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' ') )
-  getdrivelist
-  # Remove not excludable devices from drive list
-  for i in "${devicelist[@]}"; do
-    drivelist=(${drivelist[@]//*$i*})
-  done
-  echo "${drivelist[@]}" | tr ' ' '\n'
-  exit
-fi
 
 usage() {
  echo
- echo "Usage: $program_name [-VaAcnRFSlLq] [-N idle] [-I drive[,drive]] [-E drive[,drive]] [-i ip] [-d day] [-h hour] [-m time] [-t time] [-e eth] [-w wol] [-b name] [-p name] [-C case] [-D 0-4]"
+ echo "Usage: $program_name [-VacnRFSlLq] [-N idle] [-i ip] [-d day] [-h hour] [-m time] [-t time] [-e eth] [-w wol] [-b name] [-p name] [-C case] [-D 0-4]"
  echo " -V      = print program version and exit"
  echo " -a      = wait for array inactivity"
  echo " -c      = exclude cache drive from array monitoring"
- echo " -A         = exclude all drives outside array from monitoring"
- echo " -A -I list = exclude only listed drives"
- echo " -A -E list = exclude all, but listed drives"
- echo " -ED        = output excludable drives"
  echo " -n      = wait for network inactivity"
  echo " -N idle = set TCP idle threshold"
  echo " -R      = do DHCP renewal after wake-up"
@@ -121,7 +64,6 @@ eth="eth0"
 case="1"
 action="sleep"
 cache="-"
-exclude="no"
 idle="0"
 period="15"
 
@@ -131,8 +73,6 @@ extrnlTimeoutTicks=3   # interval of external activity checking; only after spin
 
 # control of internal conditions
 checkHDD="no"   # check if all HDDs are parked before counting down towards sleep
-excludeI=""     # list of drives outside array to include in monitoring
-excludeE=""     # list of drives outside array to exclude from monitoring
 stopDay=""      # only countdown towards sleep outside these days
                 # example: <stopDay="0 6"> (skip Sunday and Saturday)
 stopHour=""     # only countdown towards sleep outside these hours
@@ -161,13 +101,10 @@ quit_flag="no"  # signal program exit
 sleepNow="no"   # force sleep now
 
 # options to overwrite defaults
-while getopts "acAnN:i:I:d:h:m:t:e:E:C:w:RFqVSLlb:p:D:" opt; do
+while getopts "acnN:i:d:h:m:t:e:C:w:RFqVSLlb:p:D:" opt; do
   case $opt in
   a ) checkHDD="yes" ;;
   c ) cache="" ;;
-  A ) exclude="yes" ;;
-  I ) excludeI=$OPTARG ;;
-  E ) excludeE=$OPTARG ;;
   n ) checkTCP="yes" ;;
   N ) idle=$OPTARG ;;
   i ) pingIP="$pingIP $OPTARG" ;;
@@ -195,6 +132,30 @@ done
 # Reset action as required
 if [ "$case" != "1" ]; then action="shutdown"; fi
 
+# Get device ID of flash drive
+flash=/dev/$(ls -l /dev/disk/by-label | awk -F/ '/UNRAID/ {print $3}' | cut -c1-3)
+
+# Get device ID of cache (if present)
+if [ -z "$cache" ]; then
+  cache=$(awk '/\/mnt\/cache/ {print $1}' /proc/mounts | cut -c1-8)
+  [ -z "$cache" ] && cache="-"
+fi
+
+echo "==============================================
+command-args=$*
+action mode=$action
+check array=$checkHDD
+exclude cache=$cache
+check network=$checkTCP
+check device=$pingIP
+check SSH=$checkSSH
+check TTY=$checkTTY
+version=$version
+----------------------------------------------" | logger -t$program_name
+
+# implementation stuff
+ticklengthSecs=60  # probe hardware + count down every minute, aka a tick
+
 # Debug logging options for troubleshooting (use -D option)
 # debug=0 - no logging (default)
 # debug=1 - log to syslog and s3_sleep.log
@@ -207,11 +168,11 @@ if [ "$case" != "1" ]; then action="shutdown"; fi
 log() {
 if [ "$debug" -ne 0 ]; then
   if [ "$debug" -eq 1 ]; then
-    logger -t "$program_name" "$1"
+    logger "$program_name: $1"
     echo "`date`: $1" >>/boot/logs/$program_name.log
   fi
   if [ "$debug" -eq 2 ]; then
-    logger -t "$program_name" "$1"
+    logger "$program_name: $1"
   fi
   if [ "$debug" -eq 3 ]; then
     echo "`date`: $1" >>/boot/logs/$program_name.log
@@ -222,90 +183,11 @@ if [ "$debug" -ne 0 ]; then
 fi
 }
 
-# Get device ID of flash drive
-getflashdrive
-
-# Get device ID of cache (if present)
-getcachedrive
-
-# Generate device list for exclude mode without lists
-devicelist=()
-if [ "$exclude" = "yes" ]; then
-  getdevicelist
-  if [ ! "$cdrive" == "" ]; then devicelist+=("$cdrive"); fi
-  getdrivelist
-  # Generate device list for exclude outside mode with include list
-  if [ -n "$excludeI" ]; then
-    excludeI=${excludeI/,/ }
-    for device in $excludeI; do
-      for drive in $drivelist; do
-        drive=(${drive//|/ })
-        if [[ "$device" == "${drive[1]}" ]]; then
-          devicelist+=("${drive[0]} ")
-          break
-        fi
-      done
-    done
-  fi
-  # Generate device list for exclude outside mode with exclude list
-  if [ -n "$excludeE" ]; then
-    excludeE=${excludeE/,/ }
-    alldevicelist=()
-    alldevicelist=$(ls /dev/[hs]d?)
-    for item in $excludeE; do
-      for drive in $drivelist; do
-        drive=(${drive//|/ })
-        if [[ "$item" == "${drive[1]}" ]]; then
-          alldevicelist=${alldevicelist[@]//${drive[0]}/}
-          break
-        fi
-      done
-    done
-    for item in ${devicelist[@]}; do
-      alldevicelist=${alldevicelist[@]//$item/}
-    done
-    devicelist=( "${devicelist[@]}" "${alldevicelist[@]}" )
-  fi
-  devicelist=( ${devicelist[@]//$flash/} )
-  devicelist=( ${devicelist[@]//$cache/} )
-else
-  devicelist=$(ls /dev/[hs]d? | egrep -v "($flash|$cache)")
-fi
-devicelist=( $(echo "${devicelist[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' ') )
-dloutput=`echo "${devicelist[@]}"`
-exdevicelist=$(ls /dev/[hs]d?)
-for item in ${devicelist[@]}; do
-  exdevicelist=${exdevicelist[@]//$item/}
-done
-exoutput=`echo "${exdevicelist[@]}"`
-cachelog=""
-if [[ "$cache" == "-" ]]; then
-  cachelog="($cdrive)"
-fi
-echo "----------------------------------------------
-command-args=$*
-action mode=$action
-check array=$checkHDD
-exclude flash=yes ($flash)
-exclude cache=$cache $cachelog
-exclude outside=$exclude ($excludeI$excludeE)
-check network=$checkTCP
-check device=$pingIP
-check SSH=$checkSSH
-check TTY=$checkTTY
-version=$version
-----------------------------------------------
-Devicelist: $dloutput
-Excluded: $exoutput
-----------------------------------------------" | logger -t$program_name
-
-ticklengthSecs=60  # probe hardware + count down every minute, aka a tick
-
 HDD_activity() {
 # preset no hard disk checking
   result=0
   if [ "$checkHDD" == "yes" ]; then
-    result=$(for d in ${devicelist[@]}; do output=`hdparm -C $d | grep active`; if [ -n "$output" ]; then echo "$d $output"; fi; done)
+    result=$(for d in $(ls /dev/[hs]d? | egrep -v "($flash|$cache)"); do hdparm -C $d | grep active ; done | wc -l)
   fi
   echo $result
 }
@@ -464,7 +346,7 @@ while [ -f "$lockfile" ]; do
   hours=$(echo $stopHour | grep "$(date +%H)" | wc -l)
   if [ $days -eq 0 -a $hours -eq 0 ]; then
     # count number of HDDs that are not parked
-    if [ "$(HDD_activity)" == "" ]; then
+    if [ $(HDD_activity) -eq 0 ]; then
       log "All HDDs are spun down"
       # start extra delay period
       if [ $intrnlCountdown -gt 0 ]; then
@@ -473,7 +355,7 @@ while [ -f "$lockfile" ]; do
       fi
     else
       # reset countdown, following HDD activity
-      log "Disk activity detected. Reset all counters. $(HDD_activity)"
+      log "Disk activity detected. Reset all counters"
       intrnlCountdown=$intrnlTimeoutTicks
       extrnlCountdown=0
     fi
