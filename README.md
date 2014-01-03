@@ -2,7 +2,7 @@
 
 #### Update
 
-*Dynamix webGui has been updated to version 2.0.5. Thanks to the support of the unRAID community a number of fixes and improvements are introduced. See the folder "change" for a list of what has been changed, including changes in the optional plugins. All users of previous versions are encouraged to upgrade to this version.*
+*Dynamix webGui has been updated to version 2.0.5. Thanks to the support of the unRAID community a number of fixes and improvements are introduced. See the folder "changes" for a list of what has been changed, including changes in the optional plugins. All users of previous versions are encouraged to upgrade to this version.*
 
 
 #### Introduction
