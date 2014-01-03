@@ -3,7 +3,7 @@ version="2.0.5"
 description="Dynamic graphical interface for unRAID media server"
 author="Bergware"
 reboot="y"
-refresh="n"
+refresh="y"
 url="/Settings/DisplaySettings"
 [dynamix.active.streams]
 version="2.0.2"
