@@ -1,4 +1,4 @@
-## Dynamix v2.0.5
+## Dynamix v2.0.6
 
 #### Update
 
