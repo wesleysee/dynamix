@@ -1,7 +1,0 @@
-Release notes v2.0.1
-====================
-Public release
-
-Release notes v2.0.0
-====================
-Initial release

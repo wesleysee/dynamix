@@ -19,8 +19,8 @@ Dynamix System Stats - disk and system usage graphs
 
 Version history:
  2013-12-27 - version 2.0.2 : Point release
- 2013-12-21 - version 2.0.1 : Public release
- 2013-12-01 - version 2.0.0 : Initial release
+ 2013-12-21 - version 2.0.1 : Point release
+ 2013-12-01 - version 2.0.0 : First release
 
 Plugin file locations:
  /boot/config/plugins/dynamix.system.stats-0.0.0-noarch-bergware.plg      # this file
@@ -40,12 +40,10 @@ if [ -f /var/log/plugins/dynamix.webGui ]; then
   rm -f &reg;/&plugin;
   rm -f /tmp/plugin-install
   rm -f /etc/rc.d/rc.sysstat
-# Proceed
   code=0
 else
 # Dynamix webGui not present
   echo "missing Dynamix webGui plugin !!!"
-# Terminate
   code=1
 fi
 # Remove this script

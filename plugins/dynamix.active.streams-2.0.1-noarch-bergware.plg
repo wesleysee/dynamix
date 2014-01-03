@@ -18,8 +18,8 @@ Copyright 2013, Bergware International
 Dynamix Active Streams - Real-time monitoring of SMB shares
 
 Version history:
- 2013-12-21 - version 2.0.1 : Public release
- 2013-12-01 - version 2.0.0 : Initial release
+ 2013-12-21 - version 2.0.1 : Point release
+ 2013-12-01 - version 2.0.0 : First release
 
 Plugin file locations:
  /boot/config/plugins/dynamix.active.streams-0.0.0-noarch-bergware.plg    # this file
