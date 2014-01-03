@@ -2,7 +2,7 @@
 
 #### Update
 
-*Dynamix webGui has been updated to version 2.0.5. Thanks to the support of the unRAID community a number of fixes and improvements are introduced. See the folder "changes" for a list of what has been changed, including changes in the optional plugins. All users of previous versions are encouraged to upgrade to this version.*
+*Dynamix webGui has been updated to version 2.0.5. Thanks to the support of the unRAID community a number of fixes and improvements are introduced. See the folder "changes" for a list of what has been changed, including changes in the optional plugins. All users of earlier versions are encouraged to upgrade to this version.*
 
 
 #### Introduction
@@ -83,7 +83,7 @@ rm <old-plugin-version>.plg
 installplg <new-plugin-version>.plg
 ```
 
-[![](/download/dynamix.plugin.control.png) Plugin Control](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.plugin.control-2.0.1-noarch-bergware.plg) -  Install, Update and Uninstall Dynamix plugins via the GUI *(updated v2.0.1)*
+[![](/download/dynamix.plugin.control.png) Plugin Control](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.plugin.control-2.0.1-noarch-bergware.plg) - Install, Update and Uninstall Dynamix plugins via the GUI *(new v2.0.1)*
 
 [![](/download/dynamix.active.streams.png) Active Streams](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.active.streams-2.0.1-noarch-bergware.plg) - View in real-time which streams are currently open *(v2.0.1)*
 
@@ -127,3 +127,7 @@ Monospace font is made more readable, both for main screen and popup screens.
 The Browser function has been rewritten for improved speed and visibility of duplicate files. These are clearly indicated by displaying them in orange.
 
 ![](/screenshots/duplicates.png)
+
+The optional "plugin control" module allows for easy installation, updating and uninstallation of all of the available Dynamix plugins via the GUI. This way maintaining your plugins becomes a breeze!
+
+![](/screenshots/plugin-control.png)
