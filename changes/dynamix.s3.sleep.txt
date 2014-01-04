@@ -1,3 +1,8 @@
+Release notes v2.0.2
+====================
+Added: possibility in include/exclude drive outside array (SlrG)
+
+Public release
 Release notes v2.0.1
 ====================
 Public release
