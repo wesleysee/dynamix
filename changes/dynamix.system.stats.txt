@@ -1,3 +1,7 @@
+Release notes v2.0.4
+====================
+Fixed: gradient display in safari
+
 Release notes v2.0.3
 ====================
 Added: support for dynamic width of graphs 984px to 1240px
