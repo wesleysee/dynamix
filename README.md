@@ -69,6 +69,8 @@ installplg dynamix.webGui-2.0.7-noarch-bergware.plg
 
 The following plugins can be used to further enhance the functionality of Dynamix. They all require the Dynamix webGui to be present (installation of the add-on will be aborted when the webGui isn't detected). Right-click the links below and select "save link as". These plugins need to be placed in the directory `/boot/config/plugins`.
 
+People who have installed **Dynamix Plugin Control** can install any optional plugin using the web GUI. The description below is to do a manual installation.
+
 To install the plugin after copying it, telnet to your unRAID server and type the following:
 ```
 cd /boot/config/plugins
