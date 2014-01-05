@@ -53,6 +53,8 @@ wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugi
 
 #### Upgrading
 
+People who have installed **Dynamix Plugin Control** can upgrade using the web GUI. The description below is to do a manual upgrade.
+
 You can upgrade to the latest version of [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.7-noarch-bergware.plg) (right-click and select "save link as")
 
 Save the file in `/boot/plugins` and type the below:
