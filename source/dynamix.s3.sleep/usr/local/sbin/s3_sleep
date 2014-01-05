@@ -236,7 +236,7 @@ if [ "$exclude" = "yes" ]; then
   getdrivelist
   # Generate device list for exclude outside mode with include list
   if [ -n "$excludeI" ]; then
-    excludeI=${excludeI/,/ }
+    excludeI=${excludeI//,/ }
     for device in $excludeI; do
       for drive in $drivelist; do
         drive=(${drive//|/ })
@@ -249,7 +249,7 @@ if [ "$exclude" = "yes" ]; then
   fi
   # Generate device list for exclude outside mode with exclude list
   if [ -n "$excludeE" ]; then
-    excludeE=${excludeE/,/ }
+    excludeE=${excludeE//,/ }
     alldevicelist=()
     alldevicelist=$(ls /dev/[hs]d?)
     for item in $excludeE; do
