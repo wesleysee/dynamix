@@ -1,0 +1,520 @@
+#!/bin/bash
+
+####################################################################################
+# s3_sleep
+# A utility to set conditional S3 sleep mode
+# This script has been adapted from the original S3 script available on the Limetech
+# forum. It accepts parameter options to overwrite the default settings.
+# Copied some parts from "cache_dirs" to get a similar background behaviour.
+#
+# Version 1.0.0   Initial version
+# Version 1.1.0   Corrections in HDD, TCP and IP monitoring and other adjustments
+# Version 1.1.1   Added -t <time> option to set network/device inactivity interval
+# Version 1.1.2   Added -e <eth> option to set ethernet interface to monitor
+# Version 1.1.3   Added -w option to set wol options prior to sleep
+#                 Added -S option to sleep now
+# Version 1.1.4   Added -b option to execute shell script before sleep
+#                 Added -p option to execute shell script after wake-up
+#
+# Version 1.2.0   Added program logging upon start
+# Version 2.0.0   Added action "sleep" or "shutdown"
+# Version 2.1.0   Added improvements for TCP and session monitoring, debugging option
+#                 Added -c option to exclude cache drive from array monitoring
+#                 Added -L option to allow remote session monitoring (SSH)
+#                 Added -l option to allow local session monitoring (TTY)
+#                 Added -N option to set idle threshold for TCP monitoring
+#                 Added -D option to allow debugging (troubleshooting)
+#                 Based on suggestions made by 'Bagpuss'
+# Version 2.1.1   SlrG added feature to include/exclude drives outside of array
+#
+# Bergware International
+####################################################################################
+version=2.1.1
+program_name=`basename $0`
+
+# Get device ID of flash drive
+getflashdrive(){
+  flash=/dev/$(ls -l /dev/disk/by-label | awk -F/ '/UNRAID/ {print $3}' | cut -c1-3)
+  }
+
+# Get device ID of cache (if present)
+getcachedrive(){
+  cdrive=$(awk '/\/mnt\/cache/ {print $1}' /proc/mounts | cut -c1-8)
+  if [ -z "$cache" ]; then
+    cache="$cdrive"
+    [ -z "$cache" ] && cache="-"
+  fi
+}
+
+# Get list of array devices
+getdevicelist(){
+  devicelist=()
+  while read ini
+  do
+    case $ini in
+      rdevName.*)
+        device=${ini#*=}
+        if [ ! "/dev/$device" == "/dev/" ]; then
+          devicelist+=("/dev/$device ")
+        fi
+    esac
+  done < /proc/mdcmd
+}
+
+# Get list of all drives
+getdrivelist(){
+  drivelist=( $(ls -l /dev/disk/by-id/[au]* | grep -v part1 | sed 's/.*id\///g' | sed 's/-> ..\/..\//\/dev\//g' | awk '{ print $2 "|" $1}' | sort -k1) )
+  drivelist=$(echo "${drivelist[@]}" | tr '\n' ' ')
+}
+
+if [ "$1" == "-ED" ]; then
+  # Generate device list including flash and cache
+  getflashdrive
+  getcachedrive
+  getdevicelist
+  devicelist+=("$flash");
+  devicelist+=("$cache");
+  devicelist=( $(echo "${devicelist[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' ') )
+  getdrivelist
+  # Remove not excludable devices from drive list
+  for i in "${devicelist[@]}"; do
+    drivelist=(${drivelist[@]//*$i*})
+  done
+  echo "${drivelist[@]}" | tr ' ' '\n'
+  exit
+fi
+
+usage() {
+ echo
+ echo "Usage: $program_name [-VaAcnRFSlLq] [-N idle] [-I drive[,drive]] [-E drive[,drive]] [-i ip] [-d day] [-h hour] [-m time] [-t time] [-e eth] [-w wol] [-b name] [-p name] [-C case] [-D 0-4]"
+ echo " -V      = print program version and exit"
+ echo " -a      = wait for array inactivity"
+ echo " -c      = exclude cache drive from array monitoring"
+ echo " -A         = exclude all drives outside array from monitoring"
+ echo " -A -I list = exclude only listed drives"
+ echo " -A -E list = exclude all, but listed drives"
+ echo " -ED        = output excludable drives"
+ echo " -n      = wait for network inactivity"
+ echo " -N idle = set TCP idle threshold"
+ echo " -R      = do DHCP renewal after wake-up"
+ echo " -F      = force gigabit speed after wake-up"
+ echo " -S      = sleep NOW"
+ echo " -i ip   = IP address to ping (may be repeated as many times as desired)"
+ echo " -L      = check remotely logged in users (SSH)"
+ echo " -l      = check locally logged in users"
+ echo " -d day  = Excluded day (may be repeated as many times as desired)"
+ echo " -h hour = Excluded hour (may be repeated as many times as desired)"
+ echo " -m time = extra delay after array inactivity"
+ echo " -t time = interval of network / device inactivity"
+ echo " -e eth  = select interface to monitor"
+ echo " -w wol  = set WOL options before sleep"
+ echo " -b name = execute shell script 'name' before sleep"
+ echo " -p name = execute shell script 'name' after wake-up"
+ echo " -C case = execute case sleep (1) or shutdown (2)"
+ echo " -D 0-4  = set debug reporting (0-4)"
+ echo " -q      = terminate running background instance of s3_sleep"
+}
+
+# default settings
+debug="0"
+eth="eth0"
+case="1"
+action="sleep"
+cache="-"
+exclude="no"
+idle="0"
+period="15"
+
+# before going to sleep
+intrnlTimeoutTicks=30  # ticks after HDD spindown before checking for external activity
+extrnlTimeoutTicks=3   # interval of external activity checking; only after spindown+internal countdown
+
+# control of internal conditions
+checkHDD="no"   # check if all HDDs are parked before counting down towards sleep
+excludeI=""     # list of drives outside array to include in monitoring
+excludeE=""     # list of drives outside array to exclude from monitoring
+stopDay=""      # only countdown towards sleep outside these days
+                # example: <stopDay="0 6"> (skip Sunday and Saturday)
+stopHour=""     # only countdown towards sleep outside these hours
+                # example: <stopHour="07 08 19 20">
+                # always countdown: <stopDay=""> and <stopHour="">
+
+# control of external conditions
+checkTCP="no"   # check for TCP activity
+checkSSH="no"   # check for remote login sessions (telnet or SSH)
+checkTTY="no"   # check for local login sessions (if "no" allows console debugging)
+pingIP=""       # do not sleep if <$pingsIPs> are pingable
+                # example: <pingIP="192.168.1.4 192.168.1.5">
+                # no ping-check: <pingIP="">
+
+# before sleep
+wolCmd=""       # set wol options before sleep
+preRun=""       # no additional commands to run
+
+# after waking up
+dhcpRenew="no"  # <no> for servers w/static IP address
+forceGb="no"    # might not be needed; probably always safe
+postRun=""      # no additional commands to run
+
+# program control
+quit_flag="no"  # signal program exit
+sleepNow="no"   # force sleep now
+
+# options to overwrite defaults
+while getopts "acAnN:i:I:d:h:m:t:e:E:C:w:RFqVSLlb:p:D:" opt; do
+  case $opt in
+  a ) checkHDD="yes" ;;
+  c ) cache="" ;;
+  A ) exclude="yes" ;;
+  I ) excludeI=$OPTARG ;;
+  E ) excludeE=$OPTARG ;;
+  n ) checkTCP="yes" ;;
+  N ) idle=$OPTARG ;;
+  i ) pingIP="$pingIP $OPTARG" ;;
+  d ) stopDay="$stopDay $OPTARG" ;;
+  h ) stopHour="$stopHour $OPTARG" ;;
+  m ) intrnlTimeoutTicks=$OPTARG ;;
+  t ) extrnlTimeoutTicks=$OPTARG ;;
+  e ) eth=$OPTARG ;;
+  C ) case=$OPTARG ;;
+  w ) wolCmd="$wolCmd $OPTARG" ;;
+  R ) dhcpRenew="yes" ;;
+  F ) forceGb="yes" ;;
+  S ) sleepNow="yes" ;;
+  L ) checkSSH="yes" ;;
+  l ) checkTTY="yes" ;;
+  b ) preRun=$OPTARG ;;
+  p ) postRun=$OPTARG ;;
+  D ) debug=$OPTARG ;;
+  q ) quit_flag="yes" ;;
+  \?) usage >&2 ; exit ;;
+  V ) echo $program_name version: $version ; exit ;;
+  esac
+done
+
+# Reset action as required
+if [ "$case" != "1" ]; then action="shutdown"; fi
+
+# Debug logging options for troubleshooting (use -D option)
+# debug=0 - no logging (default)
+# debug=1 - log to syslog and s3_sleep.log
+# debug=2 - log to syslog
+# debug=3 - log to s3_sleep.log
+# debug=4 - log to console
+
+# Use this feature only in case of sleep not working
+# It is intended to help in troubleshooting
+log() {
+if [ "$debug" -ne 0 ]; then
+  if [ "$debug" -eq 1 ]; then
+    logger -t "$program_name" "$1"
+    echo "`date`: $1" >>/boot/logs/$program_name.log
+  fi
+  if [ "$debug" -eq 2 ]; then
+    logger -t "$program_name" "$1"
+  fi
+  if [ "$debug" -eq 3 ]; then
+    echo "`date`: $1" >>/boot/logs/$program_name.log
+  fi
+  if [ "$debug" -eq 4 ]; then
+    echo "`date`: $1"
+  fi
+fi
+}
+
+# Get device ID of flash drive
+getflashdrive
+
+# Get device ID of cache (if present)
+getcachedrive
+
+# Generate device list for exclude mode without lists
+devicelist=()
+if [ "$exclude" = "yes" ]; then
+  getdevicelist
+  if [ ! "$cdrive" == "" ]; then devicelist+=("$cdrive"); fi
+  getdrivelist
+  # Generate device list for exclude outside mode with include list
+  if [ -n "$excludeI" ]; then
+    excludeI=${excludeI//,/ }
+    for device in $excludeI; do
+      for drive in $drivelist; do
+        drive=(${drive//|/ })
+        if [[ "$device" == "${drive[1]}" ]]; then
+          devicelist+=("${drive[0]} ")
+          break
+        fi
+      done
+    done
+  fi
+  # Generate device list for exclude outside mode with exclude list
+  if [ -n "$excludeE" ]; then
+    excludeE=${excludeE//,/ }
+    alldevicelist=()
+    alldevicelist=$(ls /dev/[hs]d?)
+    for item in $excludeE; do
+      for drive in $drivelist; do
+        drive=(${drive//|/ })
+        if [[ "$item" == "${drive[1]}" ]]; then
+          alldevicelist=${alldevicelist[@]//${drive[0]}/}
+          break
+        fi
+      done
+    done
+    for item in ${devicelist[@]}; do
+      alldevicelist=${alldevicelist[@]//$item/}
+    done
+    devicelist=( "${devicelist[@]}" "${alldevicelist[@]}" )
+  fi
+  devicelist=( ${devicelist[@]//$flash/} )
+  devicelist=( ${devicelist[@]//$cache/} )
+else
+  devicelist=$(ls /dev/[hs]d? | egrep -v "($flash|$cache)")
+fi
+devicelist=( $(echo "${devicelist[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' ') )
+dloutput=`echo "${devicelist[@]}"`
+exdevicelist=$(ls /dev/[hs]d?)
+for item in ${devicelist[@]}; do
+  exdevicelist=${exdevicelist[@]//$item/}
+done
+exoutput=`echo "${exdevicelist[@]}"`
+cachelog=""
+if [[ "$cache" == "-" ]]; then
+  cachelog="($cdrive)"
+fi
+echo "----------------------------------------------
+command-args=$*
+action mode=$action
+check array=$checkHDD
+exclude flash=yes ($flash)
+exclude cache=$cache $cachelog
+exclude outside=$exclude ($excludeI$excludeE)
+check network=$checkTCP
+check device=$pingIP
+check SSH=$checkSSH
+check TTY=$checkTTY
+version=$version
+----------------------------------------------
+Devicelist: $dloutput
+Excluded: $exoutput
+----------------------------------------------" | logger -t$program_name
+
+ticklengthSecs=60  # probe hardware + count down every minute, aka a tick
+
+HDD_activity() {
+# preset no hard disk checking
+  result=0
+  if [ "$checkHDD" == "yes" ]; then
+    result=$(for d in ${devicelist[@]}; do output=`hdparm -C $d | grep active`; if [ -n "$output" ]; then echo "$d $output"; fi; done)
+  fi
+  echo $result
+}
+
+TCP_activity() {
+# preset no TCP checking
+  result=0
+  if [ "$checkTCP" == "yes" ]; then
+    result=$(bwm-ng -o csv -c $period -A $period -d 0 -t 1000 -T avg -I $eth | grep $eth | cut -d';' -f5 | tail -1 | cut -d. -f1)
+  fi
+  echo $result
+}
+
+IP_activity() {
+# preset no IP checking
+  result=0
+# ping each of the destinations to determine if online
+  if [ "$pingIP" != "" ]; then
+    for ip in $pingIP; do
+      # ping single destination; if it answers, it is online
+      result=$(ping -q -c 2 $ip | grep received | cut -d' ' -f4)
+      if [ $result -ne 0 ]; then
+        # if one is online, we do not need to ping
+        # any others, break out of the "for" loop.
+        break
+      fi
+    done
+  fi
+  echo $result
+}
+
+TTY_activity() {
+# preset no tty checking
+  result=0
+  if [ "$checkTTY" == "yes" ]; then
+    result=$(ps -o command,tty | grep '^\-bash' | grep 'tty' | wc -l)
+  fi
+  echo $result
+}
+
+SSH_activity() {
+# preset no ssh/telnet checking
+  result=0
+  if [ "$checkSSH" == "yes" ]; then
+    result=$(lsof -i -n -P | grep 'ESTABLISHED' | egrep '(:22-|:23-)' | wc -l)
+  fi
+  echo $result
+}
+
+pre_sleep_activity() {
+# Set WOL MagicPacket options
+  if [ "$wolCmd" != "" ]; then
+    log "Send WOL commands: $wolCmd"
+    ethtool -s $eth wol $wolCmd
+  fi
+# Additional commands to run
+  if [ -x "$preRun" ]; then
+    log "Execute custom commands before sleep"
+    $preRun
+  fi
+  echo DONE >/dev/null
+}
+
+post_sleep_activity() {
+# Force NIC to use gigabit networking
+  if [ "$forceGb" == "yes" ]; then
+    log "Set NIC to forced gigabit speed"
+    ethtool -s $eth speed 1000
+    sleep 2
+  fi
+# Force a DHCP renewal (do not use for static-ip boxes)
+  if [ "$dhcpRenew" == "yes" ]; then
+    log "Perform DHCP renewal"
+    /sbin/dhcpcd -n
+    sleep 5
+  fi
+# Additional commands to run
+  if [ -x "$postRun" ]; then
+    log "Execute custom commands after wake-up"
+    $postRun
+  fi
+  echo DONE >/dev/null
+}
+
+go_to_sleep() {
+# Do pre-sleep activities
+  pre_sleep_activity
+# Go to sleep
+  log "Enter sleep state now"
+  echo -n mem >/sys/power/state
+# Do post-sleep activities
+  log "Wake-up now"
+  post_sleep_activity
+  echo DONE >/dev/null
+}
+
+put_system_down() {
+  log "Shutdown system now"
+# Perform a 'clean' powerdown
+  [ -x /sbin/powerdown ] && /sbin/powerdown
+  [ -x /usr/sbin/powerdown ] && /usr/sbin/powerdown
+  [ -x /usr/local/sbin/powerdown ] && /usr/local/sbin/powerdown
+}
+
+# Immediate sleep or shutdown
+if [ "$sleepNow" == "yes" ]; then
+  if [ "$case" == "2" ]; then
+    put_system_down
+  else
+    go_to_sleep
+  fi
+  exit 0
+fi
+
+lockfile="/var/lock/s3_sleep.LCK"
+if [ -f "${lockfile}" ]; then
+# The file exists so read the PID to see if it is still running
+  lock_pid=$(head -n 1 "${lockfile}")
+  if [ -z "$(ps -p "${lock_pid}" | grep ${lock_pid})" ]; then
+    if [ "$quit_flag" == "no" ]; then
+      # The process is not running
+      # Echo current PID into lock file
+      echo $$ >"${lockfile}"
+    else
+      echo "$program_name ${lock_pid} is not currently running "
+      rm "${lockfile}"
+      exit 0
+    fi
+  else
+    if [ "$quit_flag" == "yes" ]; then
+      echo killing $program_name process "$lock_pid"
+      echo killing $program_name process "$lock_pid" | logger -t$program_name
+      kill "$lock_pid"
+      rm "${lockfile}"
+      exit 0
+    else
+      echo "$program_name is already running [${lock_pid}]"
+      exit 2
+    fi
+  fi
+else
+  if [ "$quit_flag" == "yes" ]; then
+    echo "$program_name not currently running "
+    exit 0
+  else
+    echo $$ >"${lockfile}"
+  fi
+fi
+
+# main
+intrnlCountdown=$intrnlTimeoutTicks
+extrnlCountdown=0
+while [ -f "$lockfile" ]; do
+  # do not countdown during specific days and hours
+  days=$(echo $stopDay | grep "$(date +%w)" | wc -l)
+  hours=$(echo $stopHour | grep "$(date +%H)" | wc -l)
+  if [ $days -eq 0 -a $hours -eq 0 ]; then
+    # count number of HDDs that are not parked
+    if [ "$(HDD_activity)" == "" ]; then
+      log "All HDDs are spun down"
+      # start extra delay period
+      if [ $intrnlCountdown -gt 0 ]; then
+        intrnlCountdown=$[$intrnlCountdown-1]
+        log "Extra delay period running: $intrnlCountdown"
+      fi
+    else
+      # reset countdown, following HDD activity
+      log "Disk activity detected. Reset all counters. $(HDD_activity)"
+      intrnlCountdown=$intrnlTimeoutTicks
+      extrnlCountdown=0
+    fi
+    if [ $intrnlCountdown -le 0 ]; then
+      # check for communication activity
+      if [ $extrnlCountdown -le 0 ]; then
+        log "Check TCP/SSH/TTY/IP activity"
+        if [ $(TCP_activity) -le $idle -a $(SSH_activity) -eq 0 -a $(TTY_activity) -eq 0 -a $(IP_activity) -eq 0 ]; then
+          log "Communication state is idle"
+          if [ "$case" == "2" ]; then
+            put_system_down
+          else
+            go_to_sleep
+          fi
+          # reset countdown, following wake-up activity
+          log "Wake-up event. Reset all counters"
+          intrnlCountdown=$intrnlTimeoutTicks
+          extrnlCountdown=$extrnlTimeoutTicks
+        else
+          # Restart polling interval period
+          log "Communication activity detected. Restart polling interval"
+          extrnlCountdown=$extrnlTimeoutTicks
+        fi
+      else
+        # wait for next monitoring action
+        extrnlCountdown=$[$extrnlCountdown-1]
+        log "Communication polling interval running: $extrnlCountdown"
+      fi
+    fi
+  else
+    log "Not sleeping. Excluded day or hour detected"
+  fi
+  # Wait a minute... tick
+  sleep $ticklengthSecs
+done &
+
+# while loop was put into background, now disown it
+# so it will continue to run when you log off
+# to get it to stop, type: rm /var/lock/s3_sleep.LCK
+background_pid=$!
+echo $background_pid >"${lockfile}"
+echo "$program_name process ID $background_pid started, To terminate it, type: $program_name -q" >&2
+echo "$program_name process ID $background_pid started, To terminate it, type: $program_name -q" | logger -t$program_name
+disown %%
