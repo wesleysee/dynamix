@@ -35,7 +35,6 @@ div.jGrowl div.jGrowl-closer{padding:4px 0;cursor:pointer;font-size:11px;font-we
 #sb-wrapper-inner{overflow:hidden;height:100px;}
 #sb-body{position:relative;height:100%;}
 #sb-body-inner{position:absolute;height:100%;width:100%;background:#F9F9F9;}
-#sb-player.html{height:100%;overflow:auto;}
 #sb-body img{border:none;}
 #sb-loading{position:relative;height:100%;}
 #sb-loading-inner{position:absolute;font-size:14px;line-height:16px;height:16px;top:50%;margin-top:-12px;width:100%;text-align:center;}
@@ -49,11 +48,6 @@ div.jGrowl div.jGrowl-closer{padding:4px 0;cursor:pointer;font-size:11px;font-we
 #sb-nav{float:right;height:16px;padding:2px 0;width:45%;}
 #sb-nav a{display:block;float:right;height:16px;width:16px;margin-left:3px;cursor:pointer;background-repeat:no-repeat;}
 #sb-nav-close{background-image:url(../images/close.png);position:absolute;display:block;z-index:1000;width:32px;height:32px;top:-15px;right:-15px;cursor:pointer;}
-#sb-nav-newclose{background-image:url(../images/maximise.png);position:absolute;display:block;z-index:1000;width:32px;height:32px;top:-15px;right:-15px;margin-right:20px;cursor:pointer;}
-#sb-nav-next{background-image:url(../images/next.png);}
-#sb-nav-previous{background-image:url(../images/previous.png);}
-#sb-nav-play{background-image:url(../images/play.png);}
-#sb-nav-pause{background-image:url(../images/pause.png);}
 #sb-counter{float:left;width:45%;}
 #sb-counter a{padding:0 4px 0 0;text-decoration:none;cursor:pointer;color:#fff;}
 #sb-counter a.sb-counter-current{text-decoration:underline;}

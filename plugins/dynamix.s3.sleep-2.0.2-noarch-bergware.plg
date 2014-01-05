@@ -19,8 +19,8 @@ Dynamix S3 Sleep - Manual and automatic sleep mode
 
 Version history:
  2013-12-29 - version 2.0.2 : SlrG added feature to include/exclude drives outside of array
- 2013-12-21 - version 2.0.1 : Point release
- 2013-12-01 - version 2.0.0 : First release
+ 2013-12-21 - version 2.0.1 : Public release
+ 2013-12-01 - version 2.0.0 : Initial release
 
 Plugin file locations:
  /boot/config/plugins/dynamix.s3.sleep-0.0.0-noarch-bergware.plg          # this file
@@ -45,10 +45,16 @@ if [ -f /var/log/plugins/dynamix.webGui ]; then
   rm -f /etc/rc.d/rc.s3sleep
   rm -f &gui;/dynamix/event/disks_mounted.&plugin;
   rm -f &gui;/dynamix/event/unmounting_disks.&plugin;
+# Update only when new entries don't exist
+  if ! grep 'excludeList' &rom;/&plugin;.cfg 2>/dev/null
+    then rm -f &rom;/&plugin;.cfg;
+  fi
+# Proceed
   code=0
 else
 # Dynamix webGui not present
   echo "missing Dynamix webGui plugin !!!"
+# Terminate
   code=1
 fi
 # Remove this script

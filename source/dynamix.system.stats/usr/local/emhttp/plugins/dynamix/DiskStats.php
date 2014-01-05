@@ -281,6 +281,21 @@ function total_status() {
 <?endif;?>
   }});
 }
+function scrollBarWidth() {
+  $('body').append('<div id="fakescrollbar" style="width:50px;height:50px;overflow:hidden;position:absolute;top:-200px;left:-200px;"></div>');
+  var fakeScrollBar = $('#fakescrollbar');
+  fakeScrollBar.append('<div style="height:100px;">&nbsp;</div>');
+  var w1 = fakeScrollBar.find('div').innerWidth();
+  fakeScrollBar.css('overflow-y','scroll');
+  var w2 = $('#fakescrollbar').find('div').html('html is required to init new width.').innerWidth();
+  fakeScrollBar.remove();
+  return (w1-w2);
+}
+function getWidth(full) {
+  var width = $(window).width();
+  if (width>1240) width = 1240; else if (width<984) width = 984; else width -= scrollBarWidth();
+  return full ? width : (width-<?=10*$ini['cols']+($ini['cols']?10:0)?>)/<?=($ini['cols']+1)?>;
+}
 $(function() {
   $('#tab1').bind({click:function(){$('#selector').hide();}});
   $('#tab2').bind({click:function(){$('#selector').show();}});
@@ -306,7 +321,7 @@ $(function() {
       spacingBottom:0,
       spacingLeft:0,
       height:260,
-      width:<?=(1240-10*$ini['cols']-($ini['cols']?10:0))/($ini['cols']+1)?>,
+      width:getWidth(false),
       animation:false,
       zoomType:'x'
     },
@@ -357,7 +372,7 @@ $(function() {
     credits:{enabled:false}
   });
   syschart = new Highcharts.Chart({
-    chart:{renderTo:'sys',events:{load:sys},type:'bar',height:<?=count($disks)*$rowHeight?>,width:1240,zoomType:null},
+    chart:{renderTo:'sys',events:{load:sys},type:'bar',height:<?=count($disks)*$rowHeight?>,width:getWidth(true),zoomType:null},
     colors:['#c80f00','#EDC240','#15b10a'],
     plotOptions:{
       series:{stacking:'normal',animation:{duration:1000},pointPadding:0.2,groupPadding:0},

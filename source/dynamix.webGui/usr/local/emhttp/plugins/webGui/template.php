@@ -156,9 +156,7 @@ snowStorm.show();
 <script>
 <?endif;?>
 
-Shadowbox.init({
-  handleOversize:"resize", displayNav:true, onClose:function() {enableInput();}
-});
+Shadowbox.init({skipSetup:true});
 
 // server uptime & update period
 var uptime = <?=strtok(exec("cat /proc/uptime"),' ')?>;
@@ -264,6 +262,7 @@ $(function() {
   updateTime();
   notifier();
   $.jGrowl.defaults.closer = false;
+  Shadowbox.setup('a.sb-enable', {onClose:function() {enableInput();}});
 <?if ($confirm['warn']):?>
   $('form').each(function() {$(this).change(function() {$.jGrowl('You have uncommitted form changes',{sticky:false,theme:'bottom',position:'bottom',life:5000});});});
 <?endif;?>
@@ -308,8 +307,8 @@ for (var i=0,mobile; mobile=mobiles[i]; i++) {
 ?>  </div>
     <div id="nav-right">
      <div id="nav-temp"></div>
-     <div id="nav-item"><a href="/update.htm?cmd=tail%20-n%2040%20-f%20/var/log/syslog&forkCmd=Start" rel="shadowbox;height=600;width=800" title="System Log"><img src="/plugins/webGui/icons/log.png" class="system">Log</a></div>
-     <div id="nav-item"><a href="/plugins/webGui/SystemInformation.php" rel="shadowbox;height=460;width=430" title="System Information"><img src="/plugins/webGui/icons/info.png" class="system">Info</a></div>
+     <div id="nav-item"><a href="/update.htm?cmd=tail%20-n%2040%20-f%20/var/log/syslog&forkCmd=Start" rel="shadowbox;height=600;width=800" title="System Log" class="sb-enable"><img src="/plugins/webGui/icons/log.png" class="system">Log</a></div>
+     <div id="nav-item"><a href="/plugins/webGui/SystemInformation.php" rel="shadowbox;height=460;width=430" title="System Information" class="sb-enable"><img src="/plugins/webGui/icons/info.png" class="system">Info</a></div>
     </div>
    </div>
   </div>

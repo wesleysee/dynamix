@@ -10,13 +10,13 @@
 function cache_status() {
   $.ajax({url:'/plugins/webGui/include/DeviceList.php',data:{path:'<?=$path?>',device:'cache',timer:timer},success:function(data) {
     if (data) $('#cache_device').html(data);
-<?if ($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0) && $var['fsState']=='Started'):?>
+<?if (($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0)) && $var['fsState']=='Started'):?>
     if ($('#tab3').is(':checked')) timer = setTimeout(cache_status,<?=abs($display['refresh'])?>);
 <?endif;?>
   }});
 }
 cache_status();
-<?if ($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0) && $var['fsState']=='Started'):?>
+<?if (($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0)) && $var['fsState']=='Started'):?>
 $('#tab3').bind({click:function() {clearTimeout(timer); cache_status();}});
 <?endif;?>
 </script>

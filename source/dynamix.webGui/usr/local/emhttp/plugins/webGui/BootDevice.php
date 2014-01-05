@@ -10,13 +10,13 @@
 function boot_status() {
   $.ajax({url:'/plugins/webGui/include/DeviceList.php',data:{path:'<?=$path?>',device:'flash',timer:timer},success:function(data) {
     if (data) $('#boot_device').html(data);
-<?if ($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0) && $var['fsState']=='Started'):?>
+<?if (($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0)) && $var['fsState']=='Started'):?>
     if ($('#tab2').is(':checked')) timer = setTimeout(boot_status,<?=abs($display['refresh'])?>);
 <?endif;?>
   }});
 }
 boot_status();
-<?if ($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0) && $var['fsState']=='Started'):?>
+<?if (($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0)) && $var['fsState']=='Started'):?>
 $('#tab2').bind({click:function() {clearTimeout(timer); boot_status();}});
 <?endif;?>
 </script>

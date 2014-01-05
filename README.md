@@ -1,8 +1,8 @@
-## Dynamix v2.0.4
+## Dynamix v2.0.7
 
 #### Update
 
-*Dynamix webGui has been updated to version 2.0.4. Thanks to the support of the unRAID community a number of fixes and improvements are introduced. See the file changes.md for a list of what has been changed, including changes in several optional plugins. All users of earlier versions are encouraged to upgrade to this version.*
+*Dynamix webGui has been updated to version 2.0.7. Thanks to the support of the unRAID community a number of fixes and improvements are introduced. See the folder "changes" for a list of what has been changed, including changes in the optional plugins. All users of earlier versions are encouraged to upgrade to this version.*
 
 
 #### Introduction
@@ -43,31 +43,33 @@ This ensures it gets installed first, before any other plugins, and the correct 
 
 ```
 cd /boot/plugins
-wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.4-noarch-bergware.plg
+wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.7-noarch-bergware.plg
 ```
 
-- Alternatively: [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.4-noarch-bergware.plg) (right-click and select "save link as")
+- Alternatively: [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.7-noarch-bergware.plg) (right-click and select "save link as")
 
 - Reboot your server to start with a *clean* webGui environment.
 - You may need to clear your Browser's cache for correct viewing.
 
 #### Upgrading
 
-You can upgrade to the latest version of [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.4-noarch-bergware.plg) (right-click and select "save link as")
+People who have installed **Dynamix Plugin Control** can upgrade using the web GUI. The description below is to do a manual upgrade.
+
+You can upgrade to the latest version of [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.0.7-noarch-bergware.plg) (right-click and select "save link as")
 
 Save the file in `/boot/plugins` and type the below:
 
 ```
 cd /boot/plugins
-rm dynamix.webGui-2.0.1-noarch-bergware.plg
-rm dynamix.webGui-2.0.2-noarch-bergware.plg
-rm dynamix.webGui-2.0.3-noarch-bergware.plg
-installplg dynamix.webGui-2.0.4-noarch-bergware.plg
+rm -f dynamix.webGui-2.0.[1-6]-noarch-bergware.plg
+installplg dynamix.webGui-2.0.7-noarch-bergware.plg
 ```
 
 #### Optional plugins
 
 The following plugins can be used to further enhance the functionality of Dynamix. They all require the Dynamix webGui to be present (installation of the add-on will be aborted when the webGui isn't detected). Right-click the links below and select "save link as". These plugins need to be placed in the directory `/boot/config/plugins`.
+
+People who have installed **Dynamix Plugin Control** can install any optional plugin using the web GUI. The description below is to do a manual installation.
 
 To install the plugin after copying it, telnet to your unRAID server and type the following:
 ```
@@ -82,25 +84,25 @@ rm <old-plugin-version>.plg
 installplg <new-plugin-version>.plg
 ```
 
-[![](/download/dynamix.plugin.control.png) Plugin Control](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.plugin.control-2.0.1-noarch-bergware.plg) - Install, Update and Uninstall Dynamix plugins via the GUI *(new v2.0.1)*
+[![](/download/dynamix.plugin.control.png) Plugin Control](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.plugin.control-2.0.2-noarch-bergware.plg) - Install, Update and Uninstall Dynamix plugins via the GUI *(v2.0.2)*
 
-[![](/download/dynamix.active.streams.png) Active Streams](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.active.streams-2.0.1-noarch-bergware.plg) - View in real-time which streams are currently open *(v2.0.1)*
+[![](/download/dynamix.active.streams.png) Active Streams](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.active.streams-2.0.2-noarch-bergware.plg) - View in real-time which streams are currently open *(v2.0.2)*
 
 [![](/download/dynamix.cache.dirs.png) Cache Dirs](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.cache.dirs-2.0.1-noarch-bergware.plg) - Keep directories in RAM to prevent unnecessary disk spin-up *(v2.0.1)*
 
-[![](/download/dynamix.disk.health.png) Disk Health](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.disk.health-2.0.2-noarch-bergware.plg) - Display SMART information of your hard drives *(updated v2.0.2)*
+[![](/download/dynamix.disk.health.png) Disk Health](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.disk.health-2.0.2-noarch-bergware.plg) - Display SMART information of your hard drives *(v2.0.2)*
 
 [![](/download/dynamix.dns.server.png) DNS Server](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.dns.server-2.0.1-noarch-bergware.plg) - Run your own DNS server to maintain your local domain *(v2.0.1)*
 
 [![](/download/dynamix.email.notify.png) Email Notify](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.email.notify-2.0.2-noarch-bergware.plg) - Receive periodic status updates by mail *(v2.0.2)*
 
-[![](/download/dynamix.s3.sleep.png) S3 Sleep](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.s3.sleep-2.0.1-noarch-bergware.plg) - Put your system to sleep on predefined conditions *(v2.0.1)*
+[![](/download/dynamix.s3.sleep.png) S3 Sleep](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.s3.sleep-2.0.2-noarch-bergware.plg) - Put your system to sleep on predefined conditions *(v2.0.2)*
 
 [![](/download/dynamix.system.info.png) System Info](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.info-2.0.1-noarch-bergware.plg) - Get detailed hardware information about your system *(v2.0.1)*
 
-[![](/download/dynamix.system.stats.png) System Stats](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.stats-2.0.2-noarch-bergware.plg) - Maintain statistics about your drives and system *(updated v2.0.2)*
+[![](/download/dynamix.system.stats.png) System Stats](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.stats-2.0.4-noarch-bergware.plg) - Maintain statistics about your drives and system *(v2.0.4)*
 
-[![](/download/dynamix.system.temp.png) System Temp](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.temp-2.0.2-noarch-bergware.plg) - View in real-time CPU and motherboard temperatures *(updated v2.0.2)*
+[![](/download/dynamix.system.temp.png) System Temp](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.temp-2.0.3-noarch-bergware.plg) - View in real-time CPU and motherboard temperatures *(v2.0.3)*
 
 [![](/download/dynamix.web.server.png) Web Server](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.web.server-2.0.2-noarch-bergware.plg) - Run your own web server, including PHP *(v2.0.2)*
 

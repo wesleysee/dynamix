@@ -12,14 +12,13 @@ var timer = null;
 function array_status() {
   $.ajax({url:'/plugins/webGui/include/DeviceList.php',data:{path:'<?=$path?>',device:'array',timer:timer},success:function(data) {
     if (data) $('#array_devices').html(data);
-
-<?if ($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0) && $var['fsState']=='Started'):?>
+<?if (($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0)) && $var['fsState']=='Started'):?>
     if ($('#tab1').is(':checked')) timer = setTimeout(array_status,<?=abs($display['refresh'])?>);
 <?endif;?>
   }});
 }
 array_status();
-<?if ($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0) && $var['fsState']=='Started'):?>
+<?if (($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0)) && $var['fsState']=='Started'):?>
 $('#tab1').bind({click:function() {clearTimeout(timer); array_status();}});
 <?endif;?>
 </script>

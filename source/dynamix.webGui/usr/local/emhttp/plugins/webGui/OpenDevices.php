@@ -10,14 +10,14 @@
 function open_status() {
   $.ajax({url:'/plugins/webGui/include/DeviceList.php',data:{path:'<?=$path?>',device:'open',timer:timer},success:function(data) {
     if (data) $('#open_devices').html(data);
-<?if ($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0) && $var['fsState']=='Started'):?>
+<?if (($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0)) && $var['fsState']=='Started'):?>
     var x = typeof(cache_status)=='function' ? 4 : 3;
     if ($('#tab'+x).is(':checked')) timer = setTimeout(open_status,<?=abs($display['refresh'])?>);
 <?endif;?>
   }});
 }
 open_status();
-<?if ($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0) && $var['fsState']=='Started'):?>
+<?if (($display['refresh']>0 || ($display['refresh']<0 && $var['mdResync']==0)) && $var['fsState']=='Started'):?>
 var x = typeof(cache_status)=='function' ? 4 : 3;
 $('#tab'+x).bind({click:function() {clearTimeout(timer); open_status();}});
 <?endif;?>

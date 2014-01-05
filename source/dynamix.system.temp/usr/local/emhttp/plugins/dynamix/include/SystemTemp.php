@@ -9,13 +9,13 @@
 <?
 function my_temp($val) {
   global $unit;
-  return "<span class='probe'>".($unit=='C' ? $val : round(9/5*$val+32))." &deg;$unit</span>";
+  return "<span class='probe'>".($val===null ? '==' : ($unit=='C' ? $val : round(9/5*$val+32)))." &deg;$unit</span>";
 }
 
 parse_str($argv[1], $_GET);
 $unit = $_GET['unit'];
-unset($temp);
-exec("sensors -A | awk '/^(CPU|M\/?B) Temp/ {print $3*1}'", &$temp);
-echo "<img src='/plugins/dynamix/icons/cpu.png' title='Processor' class='icon'>".(isset($temp[0])?my_temp($temp[0]):'n/a').'&nbsp;';
-echo "<img src='/plugins/dynamix/icons/mb.png' title='Motherboard' class='icon'>".(isset($temp[1])?my_temp($temp[1]):'n/a');
+$temp = array();
+exec("sensors -A | awk '/^CPU Temp/ {print $3*1}; /^M\/?B Temp/ {print $3*1}'", &$temp);
+echo "<img src='/plugins/dynamix/icons/cpu.png' title='Processor' class='icon'>".my_temp($temp[0])."&nbsp;";
+echo "<img src='/plugins/dynamix/icons/mb.png' title='Motherboard' class='icon'>".my_temp($temp[1]);
 ?>
