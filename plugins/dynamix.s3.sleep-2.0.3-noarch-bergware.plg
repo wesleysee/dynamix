@@ -50,6 +50,12 @@ if [ -f /var/log/plugins/dynamix.webGui ]; then
   if ! grep 'excludeList' &rom;/&plugin;.cfg 2>/dev/null
     then rm -f &rom;/&plugin;.cfg;
   fi
+# Stop service
+  process=/usr/local/sbin/s3_sleep
+  pid=$(pidof -s -x $process)
+  if [ -n "$pid" ]; then
+    $process -q 1>/dev/null 2>&amp;1
+  fi
 # Proceed
   code=0
 else
