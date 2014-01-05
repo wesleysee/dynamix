@@ -76,7 +76,7 @@ reboot="y"
 refresh="n"
 url="/Settings/WebMenu"
 [dynamix.plugin.control]
-version="2.0.2"
+version="2.0.1"
 description="Install, Update & Uninstall Dynamix plugins via the GUI"
 author="Bergware"
 reboot="n"
