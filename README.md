@@ -20,7 +20,9 @@ Dynamix webGui offers a number of improvements not available before:
 - Improved operability, no more accidental cancellations or wrong button clicking.
 - Fully compatible with unRAID OS v5.0.
 
-Dynamix webGui completely replaces the stock unRAID GUI which comes with version 5.0 or the enhanced Limetech webGui on github, do **not** use Dynamix webGui on any earlier versions - including the earlier RC candidates of unRAID.
+Dynamix webGui completely replaces the stock unRAID GUI which comes with version 5.0 or the enhanced Limetech webGui on github.
+
+Do **not** use Dynamix webGui on any earlier versions - including the earlier RC candidates of unRAID.
 
 Do **not** run Dynamix in conjunction with the Limetech enhanced webGui, these are not compatible.
 
