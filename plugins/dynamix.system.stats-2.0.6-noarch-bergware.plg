@@ -47,6 +47,8 @@ if [ -f /var/log/plugins/dynamix.webGui ]; then
   rm -f &reg;/&plugin;
   rm -f /tmp/plugin-install
   rm -f /etc/rc.d/rc.sysstat
+# Prepare packages
+  rm -f /tmp/plugin-packages
 # Proceed
   code=0
 else
