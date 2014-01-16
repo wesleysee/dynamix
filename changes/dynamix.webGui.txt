@@ -1,3 +1,8 @@
+Release notes v2.0.9
+====================
+Added: list of unformatted drives
+Fixed: hover over disabled elements
+
 Release notes v2.0.8
 ====================
 Changed: non-display of empty array devices when online
