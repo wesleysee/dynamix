@@ -190,6 +190,8 @@ create(){
   rm -f $tmp
 }
 
+# Make sure packages directory exists
+mkdir -p &pkg;
 # Install external packages
 install /tmp/plugin-packages &prune;
 

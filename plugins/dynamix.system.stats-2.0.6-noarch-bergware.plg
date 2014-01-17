@@ -170,6 +170,8 @@ install(){
   rm -f $1
 }
 
+# Make sure packages directory exists
+mkdir -p &pkg;
 # Install external packages
 install /tmp/plugin-packages &prune;
 
