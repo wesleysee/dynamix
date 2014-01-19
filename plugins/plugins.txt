@@ -6,7 +6,7 @@ reboot="y"
 refresh="y"
 url="/Settings/DisplaySettings"
 [dynamix.active.streams]
-version="2.0.3"
+version="2.0.4"
 description="View in real-time which streams are currently open"
 author="Bergware"
 reboot="n"

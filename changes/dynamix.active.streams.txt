@@ -1,3 +1,7 @@
+Release notes v2.0.4
+====================
+Fixed: user/disk share display of streams
+
 Release notes v2.0.3
 ====================
 Fixed: user names in active streams
