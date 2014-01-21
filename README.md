@@ -9,7 +9,7 @@
 
 Dynamix webGui is a dynamic webGui for unRAID systems with enhanced features and optional add-ons.
 
-Dynamix webGui is the next step in the evolution of the original SimpleFeatures enhanced webGui for unRAID systems.
+Dynamix is a spin-off of the original [SimpleFeatures webGUI](http://lime-technology.com/forum/index.php?topic=12698) and is the next step in the evolution of the development of an enhanced webGui for unRAID systems.
 Its goal is to have pages dynamically updated and watch the operation of your unRAID server in real-time.
 
 Dynamix webGui offers a number of improvements not available before:
