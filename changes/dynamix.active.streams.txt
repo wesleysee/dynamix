@@ -1,3 +1,7 @@
+Release notes v2.0.6
+====================
+Changed: external commands to PHP equivalents
+
 Release notes v2.0.5
 ====================
 Added: support for Plex streams
