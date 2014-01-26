@@ -1,3 +1,7 @@
+Release notes v2.1.0
+====================
+Aligned unRAID v5/v6 release
+
 Release notes v2.0.6
 ====================
 Fixed: wrong naming to disks when empty slots exist

@@ -1,0 +1,180 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+<!ENTITY plugin "dynamix.email.notify">
+<!ENTITY version "2.1.0">
+<!ENTITY pkg "/boot/packages">
+<!ENTITY rom "/boot/config/plugins/dynamix">
+<!ENTITY img "/boot/config/plugins/images">
+<!ENTITY gui "/usr/local/emhttp/plugins">
+<!ENTITY log "/var/log/packages">
+<!ENTITY reg "/var/log/plugins">
+<!ENTITY src "https://raw.github.com/bergware/dynamix/master/download64">
+]>
+
+<PLUGIN>
+<!--
+Copyright 2014, Bergware International
+Dynamix Email Notification - Automatic email reporting on critical conditions
+
+Version history:
+ 2014-01-23 - version 2.1.0 : unRAID v5/v6 alignment
+
+Plugin file locations:
+ /boot/config/plugins/dynamix.email.notify-0.0.0-noarch_64-bergware.plg        # this file
+ /boot/config/plugins/dynamix/dynamix.email.notify-0.0.0-x86_64-1.txz          # executable code
+ /boot/config/plugins/images/dynamix.email.notify.png                          # icon file
+ /boot/config/plugins/dynamix/dynamix.email.notify.cfg                         # non-volatile settings
+ /var/log/plugins/dynamix.email.notify                                         # plugin registration
+
+ /etc/rc.d/rc.emailnotify                                                      # control script
+ /etc/unraid_notify.conf                                                       # email settings
+ /etc/ssmtp_config.conf                                                        # ssmtp settings
+ /etc/ssmtp_revaliases.conf                                                    # alias settings
+-->
+
+<FILE Name="/tmp/plugin-startup" Run="/bin/bash">
+<INLINE>
+if [ -f /var/log/plugins/dynamix.webGui ]; then
+# Prepare plugin
+  rm -f $(ls &rom;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
+  rm -f &reg;/&plugin;
+  rm -f /tmp/plugin-install
+  rm -f /etc/rc.d/rc.emailnotify
+# Stop service
+  process="/usr/bin/unraid_notify"
+  pid=$(pidof -s -x $process)
+  if [ -n "$pid" ]; then
+    pkill -f $process 1>/dev/null 2>&amp;1
+  fi
+# Proceed
+  code=0
+else
+# Dynamix webGui not present
+  echo "missing Dynamix webGui plugin !!!"
+# Terminate
+  code=1
+fi
+# Remove this script
+rm -f /tmp/plugin-startup
+exit $code
+</INLINE>
+</FILE>
+
+<FILE Name="&rom;/&plugin;.cfg">
+<INLINE>
+[email]
+service="0"
+[ssmtp]
+[alias]
+</INLINE>
+</FILE>
+
+<FILE Name="&rom;/&plugin;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>--no-check-certificate &src;/&plugin;-&version;-x86_64-1.txz</URL>
+</FILE>
+
+<FILE Name="&img;/&plugin;.png">
+<URL>--no-check-certificate &src;/&plugin;.png</URL>
+</FILE>
+
+<FILE Name="&gui;/dynamix/images/&plugin;.png">
+<LOCAL>&img;/&plugin;.png</LOCAL>
+</FILE>
+
+<FILE Name="/etc/rc.d/rc.emailnotify" Mode="0770">
+<INLINE>
+#!/bin/sh
+program="unraid_notify"
+execute="/usr/bin/$program"
+options="/etc/unraid_notify.conf"
+pid=$(pidof -s -x $execute)
+
+case "$1" in
+'start')
+  if [ -z "$pid" ]; then
+    $execute start 1>/dev/null 2>&amp;1
+    echo "$program started"
+  else
+    echo "$program already running!"
+  fi
+;;
+'stop')
+  if [ -n "$pid" ]; then
+    pkill -f $execute 1>/dev/null 2>&amp;1
+    timer=5
+    until [ -z "$(pidof -s -x $execute)" ] || [ $timer -eq 0 ]; do
+      timer=$((timer-1))
+      sleep 1
+    done
+    echo "$program stopped"
+  else
+    echo "$program not running!"
+  fi
+;;
+*)
+  echo "Usage: $(basename $0) start|stop"
+esac
+</INLINE>
+</FILE>
+
+<FILE Name="/tmp/plugin-install" Run="/bin/bash">
+<INLINE>
+cfg="&rom;/&plugin;.cfg"
+echo "executing !"
+
+create(){
+  tmp="/tmp/create.tmp"
+  sed -n "/^\[$1\]/,/^\[/p" $cfg | grep -v '^\[' > $tmp
+  while read line; do
+    key=$(echo $line | cut -d'=' -f1)
+    val=$(echo $line | cut -d'"' -f2)
+    if [ $(expr index "$val" /) -eq 0 ]; then
+      sed -i "s/^$key=.*/$key=$val/" $2
+    else
+      sed -i "s:^$key=.*:$key=$val:" $2
+    fi
+  done &lt;$tmp
+  rm -f $tmp
+}
+
+# SSMTP linkage
+rm -f /etc/ssmtp/ssmtp.*
+ln -sf /etc/ssmtp_config.conf /etc/ssmtp/ssmtp.conf
+rm -f /etc/ssmtp/revaliases.*
+ln -sf /etc/ssmtp_revaliases.conf /etc/ssmtp/revaliases.conf
+
+# Create configuration files
+create 'email' '/etc/unraid_notify.conf'
+create 'ssmtp' '/etc/ssmtp_config.conf'
+create 'alias' '/etc/ssmtp_revaliases.conf'
+
+# Start service
+enable=$(grep "^service=" $cfg | cut -d'"' -f2)
+if [ "$enable" == "1" ]; then
+  /etc/rc.d/rc.emailnotify start >/dev/null
+fi
+
+# Update file access mode
+chmod 600 $(awk '/(\.htm$|\.php$|\.js$|\.page$|\.css$|\.png$|\.gif$)/ {print "/"$0}' &log;/&plugin;-&version;-x86_64-1)
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &plugin; has been installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2014, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+
+# Remove this install file - we are done!
+rm -f /tmp/plugin-install
+</INLINE>
+</FILE>
+
+<FILE Name="&reg;/&plugin;">
+<INLINE>
+&plugin; v&version;
+</INLINE>
+</FILE>
+</PLUGIN>
