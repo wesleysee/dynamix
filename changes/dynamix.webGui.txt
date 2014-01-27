@@ -1,6 +1,11 @@
 Release notes v2.1.0
 ====================
 Aligned unRAID v5/v6 release
+Fixed: PHP code run in version 5.2, 5.3 and 5.4
+Fixed: wrong active tab in certain situations
+Fixed: table header on notifications archive page
+Added: DONE button on flash settings page
+Added: DONE button on notifications archive page
 
 Release notes v2.0.9
 ====================
