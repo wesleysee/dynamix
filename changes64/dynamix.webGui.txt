@@ -1,6 +1,6 @@
 Release notes v2.1.1
 ====================
-Added: new option "Settings page in tabbed view"
+Added: new option "Settings page as tabbed view"
 Fixed: wrong active tab in certain situations
 
 Release notes v2.1.0
