@@ -1,3 +1,8 @@
+Release notes v2.1.1
+====================
+Added: new option "Settings page in tabbed view"
+Fixed: wrong active tab in certain situations
+
 Release notes v2.1.0
 ====================
 Aligned unRAID v5/v6 release
