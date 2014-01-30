@@ -1,8 +1,8 @@
-## Dynamix v2.1.0
+## Dynamix v2.1.1
 
 #### Update
 
-*Dynamix webGui has been updated to version 2.1.0. Thanks to the support of the unRAID community a number of fixes and improvements are introduced. See the folder "changes" for a list of what has been changed, including changes in the optional plugins. All users of earlier versions are encouraged to upgrade to this version.*
+*Dynamix webGui has been updated to version 2.1.1. Thanks to the support of the unRAID community a number of fixes and improvements are introduced. See the folder "changes" for a list of what has been changed, including changes in the optional plugins. All users of earlier versions are encouraged to upgrade to this version.*
 
 *Version 2.1.0 is code alignment with the 64-bit version which is released separately.*
 
@@ -49,10 +49,10 @@ This ensures it gets installed first, before any other plugins, and the correct 
 
 ```
 cd /boot/plugins
-wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.1.0-noarch-bergware.plg
+wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.1.1-noarch-bergware.plg
 ```
 
-- Alternatively: [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.1.0-noarch-bergware.plg) (right-click and select "save link as")
+- Alternatively: [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.1.1-noarch-bergware.plg) (right-click and select "save link as")
 
 - Reboot your server to start with a *clean* webGui environment.
 - You may need to clear your Browser's cache for correct viewing.
@@ -61,14 +61,14 @@ wget --no-check-certificate https://raw.github.com/bergware/dynamix/master/plugi
 
 People who have installed **Dynamix Plugin Control** can upgrade using the web GUI. The description below is to do a manual upgrade.
 
-You can upgrade to the latest version of [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.1.0-noarch-bergware.plg) (right-click and select "save link as")
+You can upgrade to the latest version of [![](/download/dynamix.webGui.png)](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.webGui-2.1.1-noarch-bergware.plg) (right-click and select "save link as")
 
 Save the file in `/boot/plugins` and type the below:
 
 ```
 cd /boot/plugins
-rm -f dynamix.webGui-2.0.[1-9]-noarch-bergware.plg
-installplg dynamix.webGui-2.1.0-noarch-bergware.plg
+rm -f dynamix.webGui-2.1.0-noarch-bergware.plg
+installplg dynamix.webGui-2.1.1-noarch-bergware.plg
 ```
 
 #### Optional plugins
