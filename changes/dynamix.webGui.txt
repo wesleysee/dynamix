@@ -1,5 +1,9 @@
 Release notes v2.1.1
 ====================
+Added: disable "share add" when shares are disabled
+
+Release notes v2.1.1
+====================
 Added: new option "Settings page as tabbed view"
 Fixed: wrong active tab in certain situations
 
