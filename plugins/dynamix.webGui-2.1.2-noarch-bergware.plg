@@ -2,7 +2,7 @@
 
 <!DOCTYPE PLUGIN [
 <!ENTITY plugin "dynamix.webGui">
-<!ENTITY version "2.1.1">
+<!ENTITY version "2.1.2">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY plg "/boot/plugins">
 <!ENTITY rom "/boot/config/plugins/dynamix">
