@@ -49,7 +49,7 @@ rm -f $(ls &plg;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
 rm -f &reg;/&plugin;
 rm -f /tmp/plugin-install
 # Update only when new entries don't exist
-if [ -f &rom;/&plugin;.cfg ] &amp;&amp; [ $(egrep '^(text|usage|tabs)=' dynamix.webGui.cfg | wc -l) -ne 3 ]; then
+if [ -f &rom;/&plugin;.cfg ] &amp;&amp; [ $(egrep '^(text|usage|tabs)=' &rom;/&plugin;.cfg | wc -l) -ne 3 ]; then
   rm -f &rom;/&plugin;.cfg
 fi
 # Wait for network (only needed for this *first* plugin)
