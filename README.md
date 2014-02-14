@@ -106,7 +106,7 @@ installplg <new-plugin-version>.plg
 
 [![](/download/dynamix.system.info.png) System Info](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.info-2.1.0-noarch-bergware.plg) - Get detailed hardware information about your system *(v2.1.0)*
 
-[![](/download/dynamix.system.stats.png) System Stats](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.stats-2.1.0-noarch-bergware.plg) - Maintain statistics about your drives and system *(v2.1.0)*
+[![](/download/dynamix.system.stats.png) System Stats](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.stats-2.1.1-noarch-bergware.plg) - Maintain statistics about your drives and system *(v2.1.1)*
 
 [![](/download/dynamix.system.temp.png) System Temp](https://raw.github.com/bergware/dynamix/master/plugins/dynamix.system.temp-2.1.0-noarch-bergware.plg) - View in real-time CPU and motherboard temperatures *(v2.1.0)*
 
