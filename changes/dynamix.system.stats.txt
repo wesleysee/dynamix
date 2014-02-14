@@ -1,6 +1,6 @@
 Release notes v2.1.1
 ====================
-Changed: control positioning
+Added: new setting 'show disk size'
 
 Release notes v2.1.0
 ====================
