@@ -75,7 +75,7 @@ rm -f /tmp/plugin-install
 # Append new entries (if not existing)
 append 'tabs="0"' 'display'
 append 'usage="1"' 'display'
-append 'text="1"' 'display'
+append 'text="0"' 'display'
 
 # Wait for network (only needed for this *first* plugin)
 timer=30
@@ -118,7 +118,7 @@ snow="0"
 icons="1"
 tabs="0"
 usage="1"
-text="1"
+text="0"
 refresh="1000"
 [parity]
 mode="0"
