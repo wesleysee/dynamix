@@ -35,6 +35,28 @@ Plugin file locations:
 
 <FILE Name="/tmp/plugin-startup" Run="/bin/bash">
 <INLINE>
+append(){
+  if [ ! -f &rom;/&plugin;.cfg ]; then
+    return
+  fi
+  key=$(echo $1|cut -d'=' -f1)
+  end=$(wc -l &lt;&rom;/&plugin;.cfg)
+  if [ -z "$2" ]; then
+    if [ $(grep "^$key=" &rom;/&plugin;.cfg|wc -l) -eq 0 ]; then
+      sed -i "$end a $1" &rom;/&plugin;.cfg
+    fi
+    return
+  fi
+  if [ $(sed -n "/^\[$2\]/,/^\[/p" &rom;/&plugin;.cfg|grep "^$key="|wc -l) -eq 0 ]; then
+    row=$(sed -n "/^\[$2\]/,/^\[/=" &rom;/&plugin;.cfg|tail -1)
+    if [ $row == $end ]; then
+      sed -i "$end a $1" &rom;/&plugin;.cfg
+    else
+      sed -i "$row i $1" &rom;/&plugin;.cfg
+    fi
+  fi
+}
+
 if [ ! -f &reg;/&plugin; ]; then
 # Wipe the stock unRAID webGui
   rm -rf /usr/local/emhttp/plugins/indexer
@@ -44,14 +66,17 @@ if [ ! -f &reg;/&plugin; ]; then
 # Remove unRAID webGui settings
   rm -rf /boot/config/plugins/webGui
 fi
+
 # Prepare plugin
 rm -f $(ls &plg;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
 rm -f &reg;/&plugin;
 rm -f /tmp/plugin-install
-# Update only when new entries don't exist
-if [ -f &rom;/&plugin;.cfg ] &amp;&amp; [ $(egrep '^(text|usage|tabs)=' &rom;/&plugin;.cfg | wc -l) -ne 3 ]; then
-  rm -f &rom;/&plugin;.cfg
-fi
+
+# Append new entries (if not existing)
+append 'tabs="0"' 'display'
+append 'usage="1"' 'display'
+append 'text="1"' 'display'
+
 # Wait for network (only needed for this *first* plugin)
 timer=30
 while [ $timer -gt 0 ]; do
@@ -64,6 +89,7 @@ done
 if [ $timer -eq 0 ]; then
   echo "No network communication !!!"
 fi
+
 # Remove this script
 rm -f /tmp/plugin-startup
 </INLINE>
@@ -91,8 +117,8 @@ banner=""
 snow="0"
 icons="1"
 tabs="0"
-usage="0"
-text="0"
+usage="1"
+text="1"
 refresh="1000"
 [parity]
 mode="0"
