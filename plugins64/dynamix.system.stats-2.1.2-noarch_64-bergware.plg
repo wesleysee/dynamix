@@ -2,7 +2,7 @@
 
 <!DOCTYPE PLUGIN [
 <!ENTITY plugin "dynamix.system.stats">
-<!ENTITY version "2.1.1">
+<!ENTITY version "2.1.2">
 <!ENTITY pkg "/boot/packages">
 <!ENTITY rom "/boot/config/plugins/dynamix">
 <!ENTITY img "/boot/config/plugins/images">
@@ -21,6 +21,7 @@ Copyright 2014, Bergware International
 Dynamix System Stats - disk and system usage graphs
 
 Version history:
+ 2014-02-16 - version 2.1.2 : Point release
  2014-02-14 - version 2.1.1 : Point release
  2014-01-23 - version 2.1.0 : unRAID v5/v6 alignment
 
@@ -93,7 +94,7 @@ d  perl          txz     5.18.1-x86_64-1     no-install       # perl scripting
 <INLINE>
 critical="90"
 warning="70"
-text="left"
+text="right"
 cols="1"
 show="cpu,ram,com,hdd"
 size="1"

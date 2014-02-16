@@ -1,3 +1,12 @@
+Release notes v2.1.2
+====================
+Fixed: bar colors inconsistency
+Fixed: in-bar display of right-aligned text
+Fixed: hide tab when no graphs selected
+Fixed: default button operation
+Fixed: ignore rogue entries
+Added: smart timers
+
 Release notes v2.1.1
 ====================
 Added: new setting 'show disk size'

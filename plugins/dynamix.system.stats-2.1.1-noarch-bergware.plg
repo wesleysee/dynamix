@@ -43,16 +43,36 @@ Plugin file locations:
 
 <FILE Name="/tmp/plugin-startup" Run="/bin/bash">
 <INLINE>
+append(){
+  if [ ! -f &rom;/&plugin;.cfg ]; then
+    return
+  fi
+  key=$(echo $1|cut -d'=' -f1)
+  end=$(wc -l &lt;&rom;/&plugin;.cfg)
+  if [ -z "$2" ]; then
+    if [ $(grep "^$key=" &rom;/&plugin;.cfg|wc -l) -eq 0 ]; then
+      sed -i "$end a $1" &rom;/&plugin;.cfg
+    fi
+    return
+  fi
+  if [ $(sed -n "/^\[$2\]/,/^\[/p" &rom;/&plugin;.cfg|grep "^$key="|wc -l) -eq 0 ]; then
+    row=$(sed -n "/^\[$2\]/,/^\[/=" &rom;/&plugin;.cfg|tail -1)
+    if [ $row == $end ]; then
+      sed -i "$end a $1" &rom;/&plugin;.cfg
+    else
+      sed -i "$row i $1" &rom;/&plugin;.cfg
+    fi
+  fi
+}
+
 if [ -f /var/log/plugins/dynamix.webGui ]; then
 # Prepare plugin
   rm -f $(ls &rom;/&plugin;*.t[xg]z 2>/dev/null | grep -v '&version;')
   rm -f &reg;/&plugin;
   rm -f /tmp/plugin-install
   rm -f /etc/rc.d/rc.sysstat
-# Update only when new entry doesn't exist
-if [ -f &rom;/&plugin;.cfg ] &amp;&amp; [ $(egrep '^size=' &rom;/&plugin;.cfg | wc -l) -ne 1 ]; then
-  rm -f &rom;/&plugin;.cfg
-fi
+# Append new entries (if not existing)
+  append 'size="1"'
 # Prepare packages
   rm -f /tmp/plugin-packages
 # Proceed
@@ -84,7 +104,7 @@ warning="70"
 text="left"
 cols="1"
 show="cpu,ram,com,hdd"
-size="0"
+size="1"
 port="eth0"
 unit="b"
 graph="0"

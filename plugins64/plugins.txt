@@ -48,7 +48,7 @@ reboot="n"
 refresh="n"
 url="/Utils/SystemProfiler"
 [dynamix.system.stats]
-version="2.1.1"
+version="2.1.2"
 description="Maintain statistics about your drives and system"
 author="Bergware"
 reboot="n"
