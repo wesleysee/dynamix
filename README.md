@@ -119,7 +119,7 @@ The main screen shows the different devices in separate tabs. The current screen
 
 ![](/screenshots/main-page.png)
 
-Starting from version 2.1.1 there is the possibility to choose a black theme as well.
+Starting from version 2.2.1 there is the possibility to choose a black theme as well.
 
 ![](/screenshots/main-black.png)
 
