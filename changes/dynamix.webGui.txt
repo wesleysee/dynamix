@@ -1,3 +1,13 @@
+Release notes v2.2.1
+====================
+Added: dashboard page
+Added: black theme
+Changed: css coding
+
+Release notes v2.2.0
+====================
+Beta release
+
 Release notes v2.1.4
 ====================
 Added: optional array utilization indicator
