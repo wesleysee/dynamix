@@ -3,6 +3,7 @@ Release notes v2.2.1
 Added: dashboard page
 Added: black theme
 Changed: css coding
+Fixed: utilization when no disks in array
 
 Release notes v2.2.0
 ====================
