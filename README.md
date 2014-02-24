@@ -119,6 +119,10 @@ The main screen shows the different devices in separate tabs. The current screen
 
 ![](/screenshots/main-page.png)
 
+Starting from version 2.1.1 there is the possibility to choose a black theme as well.
+
+![](/screenshots/main-black.png)
+
 The operation of the array (e.g. parity-check) can be viewed in real-time as well. When a parity-check is ongoing the statusbar at the bottom shows the current status in any screen. Note also the disabling of buttons to avoid accidental mis-clicking!
 
 ![](/screenshots/main-paritycheck.png)
