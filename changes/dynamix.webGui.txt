@@ -1,3 +1,11 @@
+Release notes v2.2.2
+====================
+Fixed: improvements and corrections to dashboard page
+Added: network info on dashboard page
+Added: offline/maintenance mode indicator
+Added: new powerdown utility, courtesy dlandon
+Changed: ball icon colors
+
 Release notes v2.2.1
 ====================
 Added: dashboard page
