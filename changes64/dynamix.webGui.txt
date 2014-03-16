@@ -2,6 +2,7 @@ Release notes v2.2.3
 ====================
 Added: hot/max temperature settings
 Fixed: text color in progress frame
+Fixed: disk spun-down icon
 
 Release notes v2.2.2
 ====================
